@@ -1,0 +1,496 @@
+'use client';
+
+import { useState, useEffect } from 'react';
+import { useRouter, useParams } from 'next/navigation';
+import { useAuth } from '@/lib/auth-context';
+import { blogPosts, BlogPost } from '@/lib/firestore';
+import { Button } from '@/components/ui/button';
+import { Card } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { motion } from 'framer-motion';
+import { Timestamp } from 'firebase/firestore';
+import { 
+  ArrowLeft, 
+  Save, 
+  Eye, 
+  Plus,
+  X,
+  Calendar,
+  Clock,
+  Tag,
+  FileText,
+  Loader2
+} from 'lucide-react';
+import Link from 'next/link';
+
+interface BlogPostForm {
+  title: string;
+  slug: string;
+  excerpt: string;
+  content: string;
+  category: string;
+  tags: string[];
+  published: boolean;
+}
+
+const categories = [
+  'NDT Testing',
+  'Environmental Engineering',
+  'Academic Research',
+  'Industry Insights',
+  'Technology Updates',
+  'Case Studies',
+  'Best Practices',
+  'Regulations & Standards'
+];
+
+export default function EditBlogPost() {
+  const { user } = useAuth();
+  const router = useRouter();
+  const params = useParams();
+  const postId = params.id as string;
+  
+  const [loading, setLoading] = useState(true);
+  const [saving, setSaving] = useState(false);
+  const [newTag, setNewTag] = useState('');
+  const [originalPost, setOriginalPost] = useState<BlogPost | null>(null);
+  const [form, setForm] = useState<BlogPostForm>({
+    title: '',
+    slug: '',
+    excerpt: '',
+    content: '',
+    category: categories[0],
+    tags: [],
+    published: false
+  });
+
+  useEffect(() => {
+    if (user && postId) {
+      loadPost();
+    }
+  }, [user, postId]);
+
+  const loadPost = async () => {
+    try {
+      setLoading(true);
+      const post = await blogPosts.getById(postId);
+      if (post) {
+        setOriginalPost(post);
+        setForm({
+          title: post.title,
+          slug: post.slug,
+          excerpt: post.excerpt,
+          content: post.content,
+          category: post.category,
+          tags: post.tags,
+          published: post.published
+        });
+      } else {
+        router.push('/admin');
+      }
+    } catch (error) {
+      console.error('Error loading post:', error);
+      router.push('/admin');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const generateSlug = (title: string) => {
+    return title
+      .toLowerCase()
+      .replace(/[^a-z0-9 -]/g, '')
+      .replace(/\s+/g, '-')
+      .replace(/-+/g, '-')
+      .trim();
+  };
+
+  const handleTitleChange = (title: string) => {
+    setForm(prev => ({
+      ...prev,
+      title,
+      slug: generateSlug(title)
+    }));
+  };
+
+  const addTag = () => {
+    if (newTag.trim() && !form.tags.includes(newTag.trim())) {
+      setForm(prev => ({
+        ...prev,
+        tags: [...prev.tags, newTag.trim()]
+      }));
+      setNewTag('');
+    }
+  };
+
+  const removeTag = (tagToRemove: string) => {
+    setForm(prev => ({
+      ...prev,
+      tags: prev.tags.filter(tag => tag !== tagToRemove)
+    }));
+  };
+
+  const calculateReadingTime = (content: string) => {
+    const wordsPerMinute = 200;
+    const words = content.trim().split(/\s+/).length;
+    return Math.ceil(words / wordsPerMinute);
+  };
+
+  const handleSubmit = async (e: React.FormEvent, publish?: boolean) => {
+    e.preventDefault();
+    if (!user || !originalPost) return;
+
+    setSaving(true);
+    try {
+      const updates = {
+        ...form,
+        published: publish !== undefined ? publish : form.published,
+        readingTime: calculateReadingTime(form.content),
+        updatedAt: Timestamp.now()
+      };
+
+      await blogPosts.update(postId, updates);
+      router.push('/admin?tab=posts');
+    } catch (error) {
+      console.error('Error updating post:', error);
+      alert('Error updating post. Please try again.');
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  if (!user) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 flex items-center justify-center">
+        <Card className="w-full max-w-md p-8">
+          <div className="text-center">
+            <h1 className="text-2xl font-bold text-slate-900 mb-4">Access Denied</h1>
+            <p className="text-slate-600 mb-6">You need to be signed in to edit blog posts.</p>
+            <Link href="/admin">
+              <Button>Go to Admin</Button>
+            </Link>
+          </div>
+        </Card>
+      </div>
+    );
+  }
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-slate-50 flex items-center justify-center">
+        <div className="flex items-center space-x-2">
+          <Loader2 className="w-6 h-6 animate-spin text-blue-600" />
+          <span className="text-slate-600">Loading post...</span>
+        </div>
+      </div>
+    );
+  }
+
+  if (!originalPost) {
+    return (
+      <div className="min-h-screen bg-slate-50 flex items-center justify-center">
+        <Card className="w-full max-w-md p-8">
+          <div className="text-center">
+            <h1 className="text-2xl font-bold text-slate-900 mb-4">Post Not Found</h1>
+            <p className="text-slate-600 mb-6">The blog post you're looking for doesn't exist.</p>
+            <Link href="/admin">
+              <Button>Back to Admin</Button>
+            </Link>
+          </div>
+        </Card>
+      </div>
+    );
+  }
+
+  return (
+    <div className="min-h-screen bg-slate-50">
+      {/* Header */}
+      <header className="bg-white border-b border-slate-200">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center h-16">
+            <div className="flex items-center space-x-4">
+              <Link href="/admin">
+                <Button variant="outline" size="sm">
+                  <ArrowLeft className="w-4 h-4 mr-2" />
+                  Back to Admin
+                </Button>
+              </Link>
+              <h1 className="text-xl font-semibold text-slate-900">Edit Blog Post</h1>
+              <Badge variant="outline">
+                {originalPost.published ? 'Published' : 'Draft'}
+              </Badge>
+            </div>
+            <div className="flex items-center space-x-3">
+              <Link href={`/blog/${originalPost.slug}`}>
+                <Button variant="outline" size="sm">
+                  <Eye className="w-4 h-4 mr-2" />
+                  View Post
+                </Button>
+              </Link>
+              <Button
+                variant="outline"
+                onClick={(e) => handleSubmit(e, false)}
+                disabled={saving || !form.title || !form.content}
+              >
+                {saving ? (
+                  <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                ) : (
+                  <Save className="w-4 h-4 mr-2" />
+                )}
+                Save Draft
+              </Button>
+              <Button
+                onClick={(e) => handleSubmit(e, true)}
+                disabled={saving || !form.title || !form.content || !form.excerpt}
+              >
+                {saving ? (
+                  <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                ) : (
+                  <Eye className="w-4 h-4 mr-2" />
+                )}
+                {originalPost.published ? 'Update' : 'Publish'}
+              </Button>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          {/* Main Content */}
+          <div className="lg:col-span-2 space-y-6">
+            <Card className="p-6">
+              <div className="space-y-6">
+                {/* Title */}
+                <div>
+                  <label className="block text-sm font-medium text-slate-700 mb-2">
+                    Title *
+                  </label>
+                  <input
+                    type="text"
+                    value={form.title}
+                    onChange={(e) => handleTitleChange(e.target.value)}
+                    placeholder="Enter blog post title..."
+                    className="w-full px-3 py-2 border border-slate-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    required
+                  />
+                </div>
+
+                {/* Slug */}
+                <div>
+                  <label className="block text-sm font-medium text-slate-700 mb-2">
+                    URL Slug
+                  </label>
+                  <input
+                    type="text"
+                    value={form.slug}
+                    onChange={(e) => setForm(prev => ({ ...prev, slug: e.target.value }))}
+                    placeholder="url-friendly-slug"
+                    className="w-full px-3 py-2 border border-slate-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  />
+                  <p className="text-xs text-slate-500 mt-1">
+                    URL: /blog/{form.slug || 'your-post-slug'}
+                  </p>
+                </div>
+
+                {/* Excerpt */}
+                <div>
+                  <label className="block text-sm font-medium text-slate-700 mb-2">
+                    Excerpt *
+                  </label>
+                  <textarea
+                    value={form.excerpt}
+                    onChange={(e) => setForm(prev => ({ ...prev, excerpt: e.target.value }))}
+                    placeholder="Brief description of the blog post..."
+                    rows={3}
+                    className="w-full px-3 py-2 border border-slate-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    required
+                  />
+                  <p className="text-xs text-slate-500 mt-1">
+                    {form.excerpt.length}/200 characters
+                  </p>
+                </div>
+
+                {/* Content */}
+                <div>
+                  <label className="block text-sm font-medium text-slate-700 mb-2">
+                    Content *
+                  </label>
+                  <textarea
+                    value={form.content}
+                    onChange={(e) => setForm(prev => ({ ...prev, content: e.target.value }))}
+                    placeholder="Write your blog post content here..."
+                    rows={20}
+                    className="w-full px-3 py-2 border border-slate-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent font-mono text-sm"
+                    required
+                  />
+                  <p className="text-xs text-slate-500 mt-1">
+                    {form.content.split(/\s+/).filter(word => word.length > 0).length} words • 
+                    ~{calculateReadingTime(form.content)} min read
+                  </p>
+                </div>
+              </div>
+            </Card>
+          </div>
+
+          {/* Sidebar */}
+          <div className="space-y-6">
+            {/* Post Settings */}
+            <Card className="p-6">
+              <h3 className="text-lg font-semibold text-slate-900 mb-4 flex items-center">
+                <FileText className="w-5 h-5 mr-2" />
+                Post Settings
+              </h3>
+              
+              <div className="space-y-4">
+                {/* Category */}
+                <div>
+                  <label className="block text-sm font-medium text-slate-700 mb-2">
+                    Category
+                  </label>
+                  <select
+                    value={form.category}
+                    onChange={(e) => setForm(prev => ({ ...prev, category: e.target.value }))}
+                    className="w-full px-3 py-2 border border-slate-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  >
+                    {categories.map(category => (
+                      <option key={category} value={category}>
+                        {category}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                {/* Tags */}
+                <div>
+                  <label className="block text-sm font-medium text-slate-700 mb-2">
+                    Tags
+                  </label>
+                  <div className="flex space-x-2 mb-2">
+                    <input
+                      type="text"
+                      value={newTag}
+                      onChange={(e) => setNewTag(e.target.value)}
+                      onKeyPress={(e) => e.key === 'Enter' && (e.preventDefault(), addTag())}
+                      placeholder="Add a tag..."
+                      className="flex-1 px-3 py-2 border border-slate-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
+                    />
+                    <Button
+                      type="button"
+                      variant="outline"
+                      size="sm"
+                      onClick={addTag}
+                    >
+                      <Plus className="w-4 h-4" />
+                    </Button>
+                  </div>
+                  <div className="flex flex-wrap gap-2">
+                    {form.tags.map(tag => (
+                      <Badge
+                        key={tag}
+                        variant="secondary"
+                        className="flex items-center space-x-1"
+                      >
+                        <Tag className="w-3 h-3" />
+                        <span>{tag}</span>
+                        <button
+                          type="button"
+                          onClick={() => removeTag(tag)}
+                          className="ml-1 hover:text-red-600"
+                        >
+                          <X className="w-3 h-3" />
+                        </button>
+                      </Badge>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Publication Status */}
+                <div>
+                  <label className="flex items-center space-x-2">
+                    <input
+                      type="checkbox"
+                      checked={form.published}
+                      onChange={(e) => setForm(prev => ({ ...prev, published: e.target.checked }))}
+                      className="rounded border-slate-300 text-blue-600 focus:ring-blue-500"
+                    />
+                    <span className="text-sm font-medium text-slate-700">
+                      Published
+                    </span>
+                  </label>
+                </div>
+              </div>
+            </Card>
+
+            {/* Post Info */}
+            <Card className="p-6">
+              <h3 className="text-lg font-semibold text-slate-900 mb-4">Post Information</h3>
+              
+              <div className="space-y-3 text-sm">
+                <div>
+                  <span className="font-medium text-slate-700">Author:</span>
+                  <span className="ml-2 text-slate-600">{originalPost.author}</span>
+                </div>
+                <div>
+                  <span className="font-medium text-slate-700">Created:</span>
+                  <span className="ml-2 text-slate-600">
+                    {originalPost.createdAt.toDate().toLocaleDateString()}
+                  </span>
+                </div>
+                <div>
+                  <span className="font-medium text-slate-700">Last Updated:</span>
+                  <span className="ml-2 text-slate-600">
+                    {originalPost.updatedAt.toDate().toLocaleDateString()}
+                  </span>
+                </div>
+                <div>
+                  <span className="font-medium text-slate-700">Status:</span>
+                  <Badge 
+                    variant={originalPost.published ? "default" : "secondary"}
+                    className="ml-2"
+                  >
+                    {originalPost.published ? 'Published' : 'Draft'}
+                  </Badge>
+                </div>
+              </div>
+            </Card>
+
+            {/* Post Preview */}
+            <Card className="p-6">
+              <h3 className="text-lg font-semibold text-slate-900 mb-4 flex items-center">
+                <Eye className="w-5 h-5 mr-2" />
+                Preview
+              </h3>
+              
+              <div className="space-y-3">
+                <div>
+                  <h4 className="font-medium text-slate-900 line-clamp-2">
+                    {form.title || 'Blog Post Title'}
+                  </h4>
+                  <p className="text-sm text-slate-600 mt-1 line-clamp-3">
+                    {form.excerpt || 'Blog post excerpt will appear here...'}
+                  </p>
+                </div>
+                
+                <div className="flex items-center space-x-4 text-xs text-slate-500">
+                  <div className="flex items-center space-x-1">
+                    <Calendar className="w-3 h-3" />
+                    <span>{originalPost.createdAt.toDate().toLocaleDateString()}</span>
+                  </div>
+                  <div className="flex items-center space-x-1">
+                    <Clock className="w-3 h-3" />
+                    <span>{calculateReadingTime(form.content)} min read</span>
+                  </div>
+                </div>
+                
+                <Badge variant="outline" className="text-xs">
+                  {form.category}
+                </Badge>
+              </div>
+            </Card>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
