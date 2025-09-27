@@ -243,7 +243,7 @@ export default function AdminDashboard() {
                       <div>
                         <p className="font-medium text-slate-900">{post.title}</p>
                         <p className="text-sm text-slate-600">
-                          {post.publishedAt.toLocaleDateString()}
+                          {post.createdAt.toDate().toLocaleDateString()}
                         </p>
                       </div>
                       <Badge variant={post.published ? "default" : "secondary"}>
@@ -336,7 +336,7 @@ export default function AdminDashboard() {
                           {post.category}
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-500">
-                          {post.publishedAt.toLocaleDateString()}
+                          {post.createdAt.toDate().toLocaleDateString()}
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                           <div className="flex space-x-2">
@@ -353,7 +353,7 @@ export default function AdminDashboard() {
                             <Button
                               variant="outline"
                               size="sm"
-                              onClick={() => handleDeletePost(post.id)}
+                              onClick={() => post.id && handleDeletePost(post.id)}
                               className="text-red-600 hover:text-red-700"
                             >
                               <Trash2 className="w-4 h-4" />
@@ -418,7 +418,7 @@ export default function AdminDashboard() {
                         <td className="px-6 py-4 whitespace-nowrap">
                           <select
                             value={contact.status}
-                            onChange={(e) => handleUpdateContactStatus(contact.id, e.target.value as ContactForm['status'])}
+                            onChange={(e) => contact.id && handleUpdateContactStatus(contact.id, e.target.value as ContactForm['status'])}
                             className="text-sm border border-slate-300 rounded-md px-2 py-1"
                           >
                             <option value="new">New</option>
@@ -427,7 +427,7 @@ export default function AdminDashboard() {
                           </select>
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-500">
-                          {contact.createdAt.toLocaleDateString()}
+                          {contact.createdAt.toDate().toLocaleDateString()}
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                           <Button
