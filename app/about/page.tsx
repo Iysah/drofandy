@@ -186,10 +186,10 @@ export default function AboutPage() {
             transition={{ duration: 0.6 }}
             className="text-center max-w-4xl mx-auto"
           >
-            <h1 className="text-4xl md:text-6xl font-bold text-foreground mb-6">
+            <h1 className="text-4xl md:text-6xl font-bold text-text mb-6">
               About <span className="text-primary">Engineering Excellence</span>
             </h1>
-            <p className="text-xl text-muted-foreground mb-8 leading-relaxed">
+            <p className="text-xl text-text mb-8 leading-relaxed">
               For over a decade, we've been at the forefront of engineering innovation, 
               delivering exceptional solutions that shape the future of infrastructure and technology.
             </p>
@@ -212,7 +212,7 @@ export default function AboutPage() {
       </SectionWrapper>
 
       {/* Mission & Vision */}
-      <SectionWrapper background="muted">
+      <SectionWrapper background="accent">
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-2 gap-12">
             <motion.div
@@ -221,13 +221,13 @@ export default function AboutPage() {
               transition={{ duration: 0.6 }}
               viewport={{ once: true }}
             >
-              <h2 className="text-3xl font-bold text-foreground mb-6">Our Mission</h2>
-              <p className="text-lg text-muted-foreground leading-relaxed mb-6">
+              <h2 className="text-3xl font-bold text-text mb-6">Our Mission</h2>
+              <p className="text-lg text-muted leading-relaxed mb-6">
                 To deliver innovative engineering solutions that enhance communities, 
                 protect the environment, and drive sustainable development through 
                 excellence in design, technology, and service.
               </p>
-              <p className="text-muted-foreground">
+              <p className="text-muted">
                 We are committed to pushing the boundaries of what's possible in 
                 engineering while maintaining the highest standards of safety, 
                 quality, and environmental responsibility.
@@ -240,13 +240,13 @@ export default function AboutPage() {
               transition={{ duration: 0.6 }}
               viewport={{ once: true }}
             >
-              <h2 className="text-3xl font-bold text-foreground mb-6">Our Vision</h2>
-              <p className="text-lg text-muted-foreground leading-relaxed mb-6">
+              <h2 className="text-3xl font-bold text-text mb-6">Our Vision</h2>
+              <p className="text-lg text-muted leading-relaxed mb-6">
                 To be the leading engineering consultancy recognized globally for 
                 innovation, sustainability, and transformative solutions that 
                 shape a better future for generations to come.
               </p>
-              <p className="text-muted-foreground">
+              <p className="text-muted">
                 We envision a world where engineering excellence drives positive 
                 change, creating resilient infrastructure and sustainable 
                 technologies that benefit society and the planet.
@@ -266,10 +266,10 @@ export default function AboutPage() {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+            <h2 className="text-3xl md:text-4xl font-bold text-text mb-4">
               Our Core Values
             </h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+            <p className="text-xl text-muted max-w-3xl mx-auto">
               The principles that guide our work and define our culture
             </p>
           </motion.div>
@@ -288,10 +288,10 @@ export default function AboutPage() {
                     <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
                       <value.icon className="w-8 h-8 text-primary" />
                     </div>
-                    <h3 className="text-xl font-semibold text-foreground mb-3">
+                    <h3 className="text-xl font-semibold text-text mb-3">
                       {value.title}
                     </h3>
-                    <p className="text-muted-foreground">
+                    <p className="text-muted">
                       {value.description}
                     </p>
                   </CardContent>
@@ -303,7 +303,7 @@ export default function AboutPage() {
       </SectionWrapper>
 
       {/* Company Timeline */}
-      <SectionWrapper background="muted">
+      <SectionWrapper background="accent">
         <div className="container mx-auto px-4">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -312,10 +312,10 @@ export default function AboutPage() {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+            <h2 className="text-3xl md:text-4xl font-bold text-text mb-4">
               Our Journey
             </h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+            <p className="text-xl text-text max-w-3xl mx-auto">
               Key milestones that have shaped our company's growth and success
             </p>
           </motion.div>
@@ -337,20 +337,20 @@ export default function AboutPage() {
                   } flex-col lg:gap-8`}
                 >
                   <div className={`lg:w-1/2 ${index % 2 === 0 ? 'lg:text-right' : 'lg:text-left'} text-center lg:mb-0 mb-4`}>
-                    <Card className="p-6 hover:shadow-lg transition-shadow">
+                    <Card className="p-6 hover:shadow shadow-none">
                       <CardContent className="p-0">
                         <div className="flex items-center justify-center lg:justify-start gap-3 mb-4">
                           <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center">
                             <milestone.icon className="w-6 h-6 text-primary" />
                           </div>
-                          <Badge variant="outline" className="text-lg px-3 py-1">
+                          <Badge variant="outline" className="text-lg text-text px-3 py-1">
                             {milestone.year}
                           </Badge>
                         </div>
-                        <h3 className="text-xl font-semibold text-foreground mb-2">
+                        <h3 className="text-xl font-semibold text-text mb-2">
                           {milestone.title}
                         </h3>
-                        <p className="text-muted-foreground">
+                        <p className="text-text">
                           {milestone.description}
                         </p>
                       </CardContent>
@@ -378,10 +378,10 @@ export default function AboutPage() {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+            <h2 className="text-3xl md:text-4xl font-bold text-text mb-4">
               Leadership Team
             </h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+            <p className="text-xl text-text max-w-3xl mx-auto">
               Meet the experienced professionals leading our engineering excellence
             </p>
           </motion.div>
@@ -401,7 +401,7 @@ export default function AboutPage() {
                       <Users className="w-12 h-12 text-primary" />
                     </div>
                     <div className="text-center">
-                      <h3 className="text-xl font-semibold text-foreground mb-1">
+                      <h3 className="text-xl font-semibold text-text mb-1">
                         {member.name}
                       </h3>
                       <p className="text-primary font-medium mb-2">
@@ -411,11 +411,11 @@ export default function AboutPage() {
                         <Badge variant="secondary">
                           {member.experience}
                         </Badge>
-                        <Badge variant="outline">
+                        <Badge variant="outline" className="text-text">
                           {member.specialization}
                         </Badge>
                       </div>
-                      <p className="text-sm text-muted-foreground">
+                      <p className="text-sm text-text">
                         {member.bio}
                       </p>
                     </div>
@@ -428,7 +428,7 @@ export default function AboutPage() {
       </SectionWrapper>
 
       {/* Certifications */}
-      <SectionWrapper background="muted">
+      <SectionWrapper background="accent">
         <div className="container mx-auto px-4">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -437,10 +437,10 @@ export default function AboutPage() {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+            <h2 className="text-3xl md:text-4xl font-bold text-text mb-4">
               Certifications & Accreditations
             </h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+            <p className="text-xl text-text max-w-3xl mx-auto">
               Our commitment to quality and excellence is validated by industry-leading certifications
             </p>
           </motion.div>
@@ -454,21 +454,21 @@ export default function AboutPage() {
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 viewport={{ once: true }}
               >
-                <Card className="h-full hover:shadow-lg transition-shadow">
+                <Card className="h-full hover:shadow-lg shadow">
                   <CardContent className="p-6">
                     <div className="flex items-start gap-3">
                       <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
                         <CheckCircle className="w-6 h-6 text-primary" />
                       </div>
                       <div>
-                        <h3 className="font-semibold text-foreground mb-1">
+                        <h3 className="font-semibold text-text mb-1">
                           {cert.name}
                         </h3>
-                        <p className="text-sm text-muted-foreground mb-2">
+                        <p className="text-sm text-text mb-2">
                           {cert.description}
                         </p>
                         <div className="flex items-center justify-between">
-                          <p className="text-xs text-muted-foreground">
+                          <p className="text-xs text-text">
                             {cert.issuer}
                           </p>
                           <Badge variant="outline" className="text-xs">
@@ -495,10 +495,10 @@ export default function AboutPage() {
             viewport={{ once: true }}
             className="text-center max-w-4xl mx-auto"
           >
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6">
+            <h2 className="text-3xl md:text-4xl font-bold text-text mb-6">
               Ready to Work with Us?
             </h2>
-            <p className="text-xl text-muted-foreground mb-8">
+            <p className="text-xl text-text mb-8">
               Let's discuss how our engineering expertise can bring your vision to life. 
               Contact us today to start your next project.
             </p>
@@ -506,7 +506,7 @@ export default function AboutPage() {
               <Button size="lg" className="text-lg px-8">
                 Start Your Project
               </Button>
-              <Button variant="outline" size="lg" className="text-lg px-8">
+              <Button variant="outline" size="lg" className="text-lg text-text px-8">
                 View Our Work
               </Button>
             </div>
