@@ -175,10 +175,10 @@ Project Details:
             transition={{ duration: 0.6 }}
             className="text-center max-w-4xl mx-auto"
           >
-            <h1 className="text-4xl md:text-6xl font-bold text-foreground mb-6">
+            <h1 className="text-4xl md:text-6xl font-bold text-text mb-6">
               Get in <span className="text-primary">Touch</span>
             </h1>
-            <p className="text-xl text-muted-foreground mb-8 leading-relaxed">
+            <p className="text-xl text-muted mb-8 leading-relaxed">
               Ready to start your next engineering project? Contact our expert team 
               for professional consultation and innovative solutions.
             </p>
@@ -201,7 +201,7 @@ Project Details:
       </SectionWrapper>
 
       {/* Contact Form & Info */}
-      <SectionWrapper background="muted">
+      <SectionWrapper background="accent">
         <div className="container mx-auto px-4">
           <div className="grid lg:grid-cols-2 gap-12">
             {/* Contact Form */}
@@ -211,10 +211,10 @@ Project Details:
               transition={{ duration: 0.6 }}
               viewport={{ once: true }}
             >
-              <Card className="h-full">
+              <Card className="h-full shadow-none border-gray-500">
                 <CardHeader>
-                  <CardTitle className="text-2xl">Start Your Project</CardTitle>
-                  <p className="text-muted-foreground">
+                  <CardTitle className="text-2xl text-text">Start Your Project</CardTitle>
+                  <p className="text-text">
                     Fill out the form below and we'll get back to you within 2 hours.
                   </p>
                 </CardHeader>
@@ -222,7 +222,7 @@ Project Details:
                   <form onSubmit={handleSubmit} className="space-y-6">
                     <div className="grid md:grid-cols-2 gap-4">
                       <div>
-                        <label htmlFor="name" className="block text-sm font-medium text-foreground mb-2">
+                        <label htmlFor="name" className="block text-sm font-medium text-text mb-2">
                           Full Name *
                         </label>
                         <input
@@ -237,7 +237,7 @@ Project Details:
                         />
                       </div>
                       <div>
-                        <label htmlFor="email" className="block text-sm font-medium text-foreground mb-2">
+                        <label htmlFor="email" className="block text-sm font-medium text-text mb-2">
                           Email Address *
                         </label>
                         <input
@@ -255,7 +255,7 @@ Project Details:
 
                     <div className="grid md:grid-cols-2 gap-4">
                       <div>
-                        <label htmlFor="company" className="block text-sm font-medium text-foreground mb-2">
+                        <label htmlFor="company" className="block text-sm font-medium text-text mb-2">
                           Company
                         </label>
                         <input
@@ -269,7 +269,7 @@ Project Details:
                         />
                       </div>
                       <div>
-                        <label htmlFor="phone" className="block text-sm font-medium text-foreground mb-2">
+                        <label htmlFor="phone" className="block text-sm font-medium text-text mb-2">
                           Phone Number
                         </label>
                         <input
@@ -286,7 +286,7 @@ Project Details:
 
                     <div className="grid md:grid-cols-2 gap-4">
                       <div>
-                        <label htmlFor="service" className="block text-sm font-medium text-foreground mb-2">
+                        <label htmlFor="service" className="block text-sm font-medium text-text mb-2">
                           Service Needed *
                         </label>
                         <select
@@ -308,7 +308,7 @@ Project Details:
                         </select>
                       </div>
                       <div>
-                        <label htmlFor="urgency" className="block text-sm font-medium text-foreground mb-2">
+                        <label htmlFor="urgency" className="block text-sm font-medium text-text mb-2">
                           Project Urgency
                         </label>
                         <select
@@ -327,7 +327,7 @@ Project Details:
 
                     <div className="grid md:grid-cols-2 gap-4">
                       <div>
-                        <label htmlFor="timeline" className="block text-sm font-medium text-foreground mb-2">
+                        <label htmlFor="timeline" className="block text-sm font-medium text-text mb-2">
                           Project Timeline
                         </label>
                         <select
@@ -345,7 +345,7 @@ Project Details:
                         </select>
                       </div>
                       <div>
-                        <label htmlFor="budget" className="block text-sm font-medium text-foreground mb-2">
+                        <label htmlFor="budget" className="block text-sm font-medium text-text mb-2">
                           Budget Range
                         </label>
                         <select
@@ -366,7 +366,7 @@ Project Details:
                     </div>
 
                     <div>
-                      <label htmlFor="message" className="block text-sm font-medium text-foreground mb-2">
+                      <label htmlFor="message" className="block text-sm font-medium text-text mb-2">
                         Project Details *
                       </label>
                       <textarea
@@ -427,8 +427,8 @@ Project Details:
               className="space-y-6"
             >
               <div>
-                <h2 className="text-3xl font-bold text-foreground mb-6">Contact Information</h2>
-                <p className="text-muted-foreground mb-8">
+                <h2 className="text-3xl font-bold text-text mb-6">Contact Information</h2>
+                <p className="text-text mb-8">
                   Get in touch with our team of engineering experts. We're here to help 
                   you achieve your project goals with innovative solutions.
                 </p>
@@ -436,20 +436,20 @@ Project Details:
 
               <div className="space-y-6">
                 {contactInfo.map((info, index) => (
-                  <Card key={info.title} className="hover:shadow-lg transition-shadow">
+                  <Card key={info.title} className="hover:shadow-lg shadow-none border-slate-500">
                     <CardContent className="p-6">
                       <div className="flex items-start gap-4">
                         <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
                           <info.icon className="w-6 h-6 text-primary" />
                         </div>
                         <div>
-                          <h3 className="font-semibold text-foreground mb-2">{info.title}</h3>
+                          <h3 className="font-semibold text-text mb-2">{info.title}</h3>
                           <div className="space-y-1 mb-2">
                             {info.details.map((detail, idx) => (
-                              <p key={idx} className="text-foreground">{detail}</p>
+                              <p key={idx} className="text-text">{detail}</p>
                             ))}
                           </div>
-                          <p className="text-sm text-muted-foreground">{info.description}</p>
+                          <p className="text-sm text-text">{info.description}</p>
                         </div>
                       </div>
                     </CardContent>
@@ -471,10 +471,10 @@ Project Details:
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+            <h2 className="text-3xl md:text-4xl font-bold text-text mb-4">
               Service Areas
             </h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+            <p className="text-xl text-muted max-w-3xl mx-auto">
               We provide engineering services across multiple regions with varying response times and coverage levels
             </p>
           </motion.div>
@@ -490,7 +490,7 @@ Project Details:
               >
                 <Card className="h-full hover:shadow-lg transition-shadow">
                   <CardHeader>
-                    <CardTitle className="flex items-center gap-2">
+                    <CardTitle className="flex items-center gap-2 text-text">
                       <MapPin className="w-5 h-5 text-primary" />
                       {area.region}
                     </CardTitle>
@@ -498,10 +498,10 @@ Project Details:
                   <CardContent>
                     <div className="space-y-4">
                       <div>
-                        <h4 className="font-medium text-foreground mb-2">Locations:</h4>
+                        <h4 className="font-medium text-muted mb-2">Locations:</h4>
                         <ul className="space-y-1">
                           {area.locations.map((location, idx) => (
-                            <li key={idx} className="text-sm text-muted-foreground flex items-center gap-2">
+                            <li key={idx} className="text-sm text-text flex items-center gap-2">
                               <div className="w-1.5 h-1.5 bg-primary rounded-full" />
                               {location}
                             </li>
@@ -510,10 +510,10 @@ Project Details:
                       </div>
                       <div className="flex justify-between items-center pt-4 border-t">
                         <div>
-                          <p className="text-sm font-medium text-foreground">Response Time</p>
-                          <p className="text-sm text-muted-foreground">{area.responseTime}</p>
+                          <p className="text-sm font-medium text-text">Response Time</p>
+                          <p className="text-sm text-text">{area.responseTime}</p>
                         </div>
-                        <Badge variant="outline">{area.coverage}</Badge>
+                        <Badge variant="outline" className="text-text">{area.coverage}</Badge>
                       </div>
                     </div>
                   </CardContent>
@@ -525,7 +525,7 @@ Project Details:
       </SectionWrapper>
 
       {/* Why Choose Us */}
-      <SectionWrapper background="muted">
+      <SectionWrapper>
         <div className="container mx-auto px-4">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -534,10 +534,10 @@ Project Details:
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+            <h2 className="text-3xl md:text-4xl font-bold text-text mb-4">
               Why Choose Engineering Excellence?
             </h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+            <p className="text-xl text-text max-w-3xl mx-auto">
               Partner with us for reliable, innovative, and professional engineering solutions
             </p>
           </motion.div>
@@ -551,15 +551,15 @@ Project Details:
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 viewport={{ once: true }}
               >
-                <Card className="h-full text-center p-6 hover:shadow-lg transition-shadow">
+                <Card className="h-full text-center p-6 hover:shadow-lg shadow">
                   <CardContent className="p-0">
                     <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
                       <reason.icon className="w-8 h-8 text-primary" />
                     </div>
-                    <h3 className="text-xl font-semibold text-foreground mb-3">
+                    <h3 className="text-xl font-semibold text-text mb-3">
                       {reason.title}
                     </h3>
-                    <p className="text-muted-foreground">
+                    <p className="text-text">
                       {reason.description}
                     </p>
                   </CardContent>

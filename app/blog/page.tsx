@@ -113,10 +113,10 @@ export default function BlogPage() {
             transition={{ duration: 0.6 }}
             className="text-center max-w-4xl mx-auto"
           >
-            <h1 className="text-4xl md:text-6xl font-bold text-foreground mb-6">
+            <h1 className="text-4xl md:text-6xl font-bold text-text mb-6">
               Engineering <span className="text-primary">Insights</span>
             </h1>
-            <p className="text-xl text-muted-foreground mb-8 leading-relaxed">
+            <p className="text-xl text-muted mb-8 leading-relaxed">
               Discover the latest trends, innovations, and expert insights in engineering. 
               From technical deep-dives to industry analysis, stay ahead with our comprehensive blog.
             </p>
@@ -151,7 +151,7 @@ export default function BlogPage() {
             <div className="flex flex-col md:flex-row gap-4 mb-8">
               {/* Search */}
               <div className="relative flex-1">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted w-4 h-4" />
                 <input
                   type="text"
                   placeholder="Search articles, topics, or tags..."
@@ -163,14 +163,14 @@ export default function BlogPage() {
               
               {/* Category Filter */}
               <div className="relative">
-                <Filter className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
+                <Filter className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted w-4 h-4" />
                 <select
                   value={selectedCategory}
                   onChange={(e) => setSelectedCategory(e.target.value)}
                   className="pl-10 pr-8 py-3 border border-input bg-background rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent appearance-none min-w-[200px]"
                 >
                   {categories.map(category => (
-                    <option key={category} value={category}>
+                    <option key={category} value={category} className="text-text">
                       {category === 'all' ? 'All Categories' : category}
                     </option>
                   ))}
@@ -180,7 +180,7 @@ export default function BlogPage() {
 
             {/* Results Count */}
             <div className="text-center mb-8">
-              <p className="text-muted-foreground">
+              <p className="text-text">
                 {loading ? 'Loading articles...' : `Showing ${filteredPosts.length} article${filteredPosts.length !== 1 ? 's' : ''}`}
                 {searchTerm && ` for "${searchTerm}"`}
                 {selectedCategory !== 'all' && ` in ${selectedCategory}`}
@@ -201,7 +201,7 @@ export default function BlogPage() {
               viewport={{ once: true }}
               className="mb-16"
             >
-              <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-8 text-center">
+              <h2 className="text-3xl md:text-4xl font-bold text-text mb-8 text-center">
                 Featured Articles
               </h2>
               
@@ -224,7 +224,7 @@ export default function BlogPage() {
                         <CardHeader>
                           <div className="flex items-center gap-2 mb-2">
                             <Badge variant="outline">{post.category}</Badge>
-                            <div className="flex items-center text-sm text-muted-foreground">
+                            <div className="flex items-center text-sm text-muted">
                               <Clock className="w-3 h-3 mr-1" />
                               {getReadingTime(post.content)}
                             </div>
@@ -234,15 +234,15 @@ export default function BlogPage() {
                           </CardTitle>
                         </CardHeader>
                         <CardContent>
-                          <p className="text-muted-foreground mb-4 line-clamp-3">
+                          <p className="text-muted mb-4 line-clamp-3">
                             {post.excerpt}
                           </p>
                           <div className="flex items-center justify-between">
-                            <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                            <div className="flex items-center gap-2 text-sm text-muted">
                               <User className="w-3 h-3" />
                               {post.author}
                             </div>
-                            <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                            <div className="flex items-center gap-2 text-sm text-muted">
                               <Calendar className="w-3 h-3" />
                               {formatDate(post.createdAt)}
                             </div>
@@ -349,9 +349,9 @@ export default function BlogPage() {
               viewport={{ once: true }}
               className="text-center max-w-2xl mx-auto"
             >
-              <BookOpen className="w-16 h-16 text-muted-foreground mx-auto mb-4" />
-              <h3 className="text-2xl font-bold text-foreground mb-4">No Articles Found</h3>
-              <p className="text-muted-foreground mb-8">
+              <BookOpen className="w-16 h-16 text-muted mx-auto mb-4" />
+              <h3 className="text-2xl font-bold text-text mb-4">No Articles Found</h3>
+              <p className="text-muted mb-8">
                 {searchTerm || selectedCategory !== 'all' 
                   ? "Try adjusting your search terms or filters to find more articles."
                   : "We're working on adding more content. Check back soon for the latest engineering insights!"
@@ -411,10 +411,10 @@ export default function BlogPage() {
             className="text-center max-w-4xl mx-auto"
           >
             <div className="bg-gradient-to-r from-primary/10 to-primary/5 border border-primary/20 rounded-lg p-8">
-              <h2 className="text-3xl font-bold text-foreground mb-4">
+              <h2 className="text-3xl font-bold text-text mb-4">
                 Stay Updated with Engineering Excellence
               </h2>
-              <p className="text-muted-foreground mb-6">
+              <p className="text-muted mb-6">
                 Subscribe to our newsletter for the latest engineering insights, 
                 industry trends, and expert analysis delivered to your inbox.
               </p>
