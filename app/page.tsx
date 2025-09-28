@@ -135,6 +135,13 @@ const testimonials = [
     company: "Innovation University",
     rating: 5,
   },
+  {
+    quote: "Their academic consulting services were instrumental in our research project success. The expertise and guidance provided were invaluable.",
+    author: "Dr. Emily John",
+    title: "Research Director",
+    company: "Innovation University",
+    rating: 5,
+  },
 ]
 
 const blogPosts = [
@@ -496,7 +503,7 @@ export default function Home() {
           </p>
         </div>
         
-        <div className="mt-16 grid gap-8 md:grid-cols-3">
+        <div className="mt-16 grid gap-8 md:grid-cols-4">
           {testimonials.map((testimonial, index) => (
             <motion.div
               key={testimonial.author}
