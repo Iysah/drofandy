@@ -27,11 +27,13 @@ import Link from 'next/link';
 export default function NotFound() {
   const [errorCode, setErrorCode] = useState('404');
   const [isAnalyzing, setIsAnalyzing] = useState(true);
+  const [timestamp, setTimestamp] = useState('');
 
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsAnalyzing(false);
     }, 2000);
+    setTimestamp(new Date().toISOString());
     return () => clearTimeout(timer);
   }, []);
 
@@ -277,7 +279,7 @@ export default function NotFound() {
                 Technical Details & Diagnostics
               </summary>
               <div className="mt-4 p-4 bg-slate-50 rounded-lg font-mono text-xs text-slate-600 space-y-1">
-                <div>Timestamp: {new Date().toISOString()}</div>
+                <div>Timestamp: {timestamp}</div>
                 <div>User Agent: {typeof window !== 'undefined' ? navigator.userAgent.substring(0, 50) + '...' : 'Server-side'}</div>
                 <div>Referrer: {typeof window !== 'undefined' ? document.referrer || 'Direct access' : 'N/A'}</div>
                 <div>Protocol: HTTPS/2.0</div>

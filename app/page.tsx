@@ -141,58 +141,38 @@ export default function Home() {
       <Navigation />
       
       {/* Hero Section */}
-      <section className="relative overflow-hidden gradient-hero text-white">
-        <div className="absolute inset-0 bg-black/20" />
+      <section className="relative overflow-hidden bg-gradient-to-br from-[var(--primary)] via-[var(--primary)] to-[var(--accent)] text-white">
+        <div className="absolute inset-0 bg-black/10" />
         <div className="container relative mx-auto px-4 py-24 md:py-32">
           <div className="mx-auto max-w-4xl text-center">
-            <motion.h1
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              className="text-4xl font-bold tracking-tight md:text-6xl lg:text-7xl"
-            >
+            <h1 className="text-4xl font-bold tracking-tight md:text-6xl lg:text-7xl animate-fade-up">
               Engineering Excellence Through{" "}
-              <span className="text-gradient bg-gradient-to-r from-blue-200 to-white bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-[var(--secondary)] to-white bg-clip-text text-transparent">
                 Innovation
               </span>
-            </motion.h1>
+            </h1>
             
-            <motion.p
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="mx-auto mt-6 max-w-2xl text-lg text-blue-100 md:text-xl"
-            >
+            <p className="mx-auto mt-6 max-w-2xl text-lg text-white/90 md:text-xl animate-fade-up-delay">
               Comprehensive NDT, Environmental, and Academic Engineering Solutions
-            </motion.p>
+            </p>
             
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-              className="mt-10 flex flex-col gap-4 sm:flex-row sm:justify-center"
-            >
-              <Button asChild size="lg" className="bg-white text-primary hover:bg-white/90">
+            <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:justify-center animate-scale-in">
+              <Button asChild size="lg" className="bg-[var(--secondary)] text-white hover:bg-[var(--secondary)]/90 shadow-lg">
                 <Link href="/services">
                   Our Services
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
               </Button>
-              <Button asChild variant="outline" size="lg" className="border-white text-white hover:bg-white hover:text-primary">
+              <Button asChild variant="outline" size="lg" className="border-white text-white hover:bg-white hover:text-[var(--primary)] shadow-lg">
                 <Link href="/contact">Get Consultation</Link>
               </Button>
-            </motion.div>
+            </div>
           </div>
         </div>
         
         {/* Animated Stats */}
         <div className="container relative mx-auto px-4 pb-16">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.6 }}
-            className="grid grid-cols-2 gap-8 md:grid-cols-4"
-          >
+          <div className="grid grid-cols-2 gap-8 md:grid-cols-4 animate-parallax-fade">
             {stats.map((stat, index) => (
               <div key={stat.label} className="text-center">
                 <div className="text-3xl font-bold md:text-4xl">
@@ -202,20 +182,20 @@ export default function Home() {
                     className="text-white"
                   />
                 </div>
-                <p className="mt-2 text-sm text-blue-200">{stat.label}</p>
+                <p className="mt-2 text-sm text-white/80">{stat.label}</p>
               </div>
             ))}
-          </motion.div>
+          </div>
         </div>
       </section>
 
       {/* Introduction Section */}
       <SectionWrapper>
         <div className="mx-auto max-w-3xl text-center">
-          <h2 className="text-3xl font-bold tracking-tight md:text-4xl">
+          <h2 className="text-3xl font-bold tracking-tight md:text-4xl text-[var(--text)]">
             A commitment to engineering excellence
           </h2>
-          <p className="mt-6 text-lg text-muted-foreground">
+          <p className="mt-6 text-lg text-[var(--muted)]">
             We deliver precision, innovation, and reliability in every project, 
             combining cutting-edge technology with decades of expertise.
           </p>
@@ -232,13 +212,13 @@ export default function Home() {
             >
               <Card className="h-full text-center card-hover">
                 <CardHeader>
-                  <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-primary/10">
-                    <feature.icon className="h-8 w-8 text-primary" />
+                  <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-[var(--primary)]/10">
+                    <feature.icon className="h-8 w-8 text-[var(--primary)]" />
                   </div>
-                  <CardTitle className="mt-4">{feature.title}</CardTitle>
+                  <CardTitle className="mt-4 text-[var(--text)]">{feature.title}</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <CardDescription className="text-base">
+                  <CardDescription className="text-base text-[var(--muted)]">
                     {feature.description}
                   </CardDescription>
                 </CardContent>
@@ -251,10 +231,10 @@ export default function Home() {
       {/* Services Overview */}
       <SectionWrapper background="muted">
         <div className="mx-auto max-w-3xl text-center">
-          <h2 className="text-3xl font-bold tracking-tight md:text-4xl">
+          <h2 className="text-3xl font-bold tracking-tight md:text-4xl text-[var(--text)]">
             Our Services
           </h2>
-          <p className="mt-6 text-lg text-muted-foreground">
+          <p className="mt-6 text-lg text-[var(--muted)]">
             Comprehensive engineering solutions tailored to meet your specific needs
           </p>
         </div>
@@ -271,19 +251,19 @@ export default function Home() {
               <Card className="h-full card-hover group">
                 <CardHeader>
                   <div className="flex items-center space-x-3">
-                    <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10 group-hover:bg-primary group-hover:text-white transition-colors">
+                    <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-[var(--primary)]/10 group-hover:bg-[var(--primary)] group-hover:text-white transition-colors">
                       <service.icon className="h-6 w-6" />
                     </div>
-                    <CardTitle className="text-xl">{service.title}</CardTitle>
+                    <CardTitle className="text-xl text-[var(--text)]">{service.title}</CardTitle>
                   </div>
                 </CardHeader>
                 <CardContent>
-                  <CardDescription className="mb-4 text-base">
+                  <CardDescription className="mb-4 text-base text-[var(--muted)]">
                     {service.description}
                   </CardDescription>
                   <Link
                     href={service.href}
-                    className="inline-flex items-center text-sm font-medium text-primary hover:text-primary-dark"
+                    className="inline-flex items-center text-sm font-medium text-[var(--primary)] hover:text-[var(--primary)]/80"
                   >
                     Learn More
                     <ChevronRight className="ml-1 h-4 w-4" />
@@ -299,10 +279,10 @@ export default function Home() {
       <SectionWrapper>
         <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
           <div>
-            <h2 className="text-3xl font-bold tracking-tight md:text-4xl">
+            <h2 className="text-3xl font-bold tracking-tight md:text-4xl text-[var(--text)]">
               Why Choose Engineering Excellence?
             </h2>
-            <p className="mt-6 text-lg text-muted-foreground">
+            <p className="mt-6 text-lg text-[var(--muted)]">
               We combine technical expertise with innovative solutions to deliver 
               exceptional results that exceed expectations.
             </p>
@@ -323,8 +303,8 @@ export default function Home() {
                   viewport={{ once: true }}
                   className="flex items-center space-x-3"
                 >
-                  <CheckCircle className="h-5 w-5 text-success" />
-                  <span>{item}</span>
+                  <CheckCircle className="h-5 w-5 text-[var(--accent)]" />
+                  <span className="text-[var(--text)]">{item}</span>
                 </motion.div>
               ))}
             </div>
@@ -346,11 +326,11 @@ export default function Home() {
               >
                 <Card className="text-center card-hover">
                   <CardContent className="pt-6">
-                    <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-primary/10">
-                      <item.icon className="h-6 w-6 text-primary" />
+                    <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-[var(--primary)]/10">
+                      <item.icon className="h-6 w-6 text-[var(--primary)]" />
                     </div>
-                    <div className="mt-4 text-2xl font-bold">{item.value}</div>
-                    <div className="text-sm text-muted-foreground">{item.label}</div>
+                    <div className="mt-4 text-2xl font-bold text-[var(--text)]">{item.value}</div>
+                    <div className="text-sm text-[var(--muted)]">{item.label}</div>
                   </CardContent>
                 </Card>
               </motion.div>
