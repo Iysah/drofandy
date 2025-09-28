@@ -16,7 +16,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "Engineering Excellence Through Innovation | Professional NDT & Environmental Services",
+    default: "Drofandy - Engineering Excellence Through Innovation | Professional NDT & Environmental Services",
     template: "%s | Engineering Excellence"
   },
   description: "Comprehensive NDT, Environmental Engineering, and Academic Consulting Solutions. Professional engineering services with precision testing, sustainable practices, and research-backed expertise.",
