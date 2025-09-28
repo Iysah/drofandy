@@ -15,7 +15,9 @@ import {
   Settings,
   Quote,
   Star,
-  ChevronRight
+  ChevronRight,
+  Calendar,
+  Clock
 } from "lucide-react"
 import { Navigation } from "@/components/navigation"
 import { Footer } from "@/components/footer"
@@ -135,54 +137,128 @@ const testimonials = [
   },
 ]
 
+const blogPosts = [
+  {
+    title: "How to prevent equipment failures with simple daily habits",
+    image: "https://images.pexels.com/photos/5726794/pexels-photo-5726794.jpeg?auto=compress&cs=tinysrgb&w=400",
+    date: "Dec 18, 2024",
+    readTime: "3 min read",
+    href: "/blog/prevent-equipment-failures",
+  },
+  {
+    title: "Top reasons to replace aging infrastructure promptly",
+    image: "https://images.pexels.com/photos/5835359/pexels-photo-5835359.jpeg?auto=compress&cs=tinysrgb&w=400",
+    date: "Jan 15, 2025",
+    readTime: "6 min read",
+    href: "/blog/replace-aging-infrastructure",
+  },
+  {
+    title: "The connection between environmental compliance and overall project success",
+    image: "https://images.pexels.com/photos/9324336/pexels-photo-9324336.jpeg?auto=compress&cs=tinysrgb&w=400",
+    date: "Jan 13, 2025",
+    readTime: "5 min read",
+    href: "/blog/environmental-compliance-success",
+  },
+  {
+    title: "The connection between environmental compliance",
+    image: "https://images.pexels.com/photos/9324336/pexels-photo-9324336.jpeg?auto=compress&cs=tinysrgb&w=400",
+    date: "Jan 13, 2025",
+    readTime: "5 min read",
+    href: "/blog/environmental-compliance-success",
+  },
+]
+
 export default function Home() {
   return (
     <div className="min-h-screen">
       <Navigation />
       
-      {/* Hero Section */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-[var(--primary)] via-[var(--primary)] to-[var(--accent)] text-white">
-        <div className="absolute inset-0 bg-black/10" />
-        <div className="container relative mx-auto px-4 py-24 md:py-32">
-          <div className="mx-auto max-w-4xl text-center">
-            <h1 className="text-4xl font-bold tracking-tight md:text-6xl lg:text-7xl animate-fade-up">
-              Engineering Excellence Through{" "}
-              <span className="bg-gradient-to-r from-[var(--secondary)] to-white bg-clip-text text-transparent">
-                Innovation
-              </span>
-            </h1>
+       {/* Hero Section */}
+      <section className="bg-[var(--background)] py-16 md:py-24">
+        <div className="container mx-auto px-4">
+          <div className="grid gap-12 lg:grid-cols-2 lg:gap-16 items-center">
+            {/* Left Content */}
+            <div className="animate-fade-up">
+              <div className="mb-4">
+                <span className="text-[var(--muted)] text-sm font-medium tracking-wide uppercase">
+                  Professional engineering solutions
+                </span>
+              </div>
+              
+              <h1 className="text-4xl font-bold tracking-tight text-[var(--text)] md:text-5xl lg:text-6xl mb-6">
+                Engineering Excellence Through{" "}
+                <span className="text-[var(--primary)]">Innovation</span>
+              </h1>
+              
+              <p className="text-lg text-[var(--muted)] mb-8 max-w-xl">
+                Comprehensive NDT, Environmental, and Academic Engineering Solutions designed to meet your unique needs. From preventive checkups to advanced analysis, excellence and confidence are always at their best.
+              </p>
+              
+              <div className="flex flex-col sm:flex-row gap-4 mb-8 animate-fade-up-delay">
+                <Button asChild size="lg" className="bg-[var(--primary)] text-white hover:bg-[var(--primary)]/90">
+                  <Link href="/services">
+                    Our Services
+                    <ArrowRight className="ml-2 h-4 w-4" />
+                  </Link>
+                </Button>
+                
+                <div className="flex items-center gap-3 text-[var(--text)]">
+                  <div className="flex items-center justify-center w-10 h-10 rounded-full bg-[var(--primary)]/10">
+                    <svg className="w-5 h-5 text-[var(--primary)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <div className="text-sm font-medium">Contact us</div>
+                    <div className="text-sm text-[var(--muted)]">(555) 123-4567</div>
+                  </div>
+                </div>
+              </div>
+            </div>
             
-            <p className="mx-auto mt-6 max-w-2xl text-lg text-white/90 md:text-xl animate-fade-up-delay">
-              Comprehensive NDT, Environmental, and Academic Engineering Solutions
-            </p>
-            
-            <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:justify-center animate-scale-in">
-              <Button asChild size="lg" className="bg-[var(--secondary)] text-white hover:bg-[var(--secondary)]/90 shadow-lg">
-                <Link href="/services">
-                  Our Services
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </Link>
-              </Button>
-              <Button asChild variant="outline" size="lg" className="border-white text-white hover:bg-white hover:text-[var(--primary)] shadow-lg">
-                <Link href="/contact">Get Consultation</Link>
-              </Button>
+            {/* Right Image */}
+            <div className="relative animate-scale-in">
+              <div className="relative overflow-hidden rounded-2xl shadow-2xl">
+                <img 
+                  src="https://images.pexels.com/photos/8961126/pexels-photo-8961126.jpeg?auto=compress&cs=tinysrgb&w=800" 
+                  alt="Professional engineer in safety gear working on construction site"
+                  className="w-full h-[500px] object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
+              </div>
+              
+              {/* Floating Stats Card */}
+              <div className="absolute -bottom-6 -left-6 bg-white rounded-xl shadow-lg p-6 border border-gray-100">
+                <div className="grid grid-cols-2 gap-4 text-center">
+                  <div>
+                    <div className="text-2xl font-bold text-[var(--primary)]">
+                      <AnimatedCounter end={500} suffix="+" />
+                    </div>
+                    <div className="text-xs text-[var(--muted)]">Projects</div>
+                  </div>
+                  <div>
+                    <div className="text-2xl font-bold text-[var(--primary)]">
+                      <AnimatedCounter end={15} suffix="+" />
+                    </div>
+                    <div className="text-xs text-[var(--muted)]">Years</div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-        
-        {/* Animated Stats */}
-        <div className="container relative mx-auto px-4 pb-16">
-          <div className="grid grid-cols-2 gap-8 md:grid-cols-4 animate-parallax-fade">
+      </section>
+      
+      {/* Additional Stats Section */}
+      <section className="bg-[var(--primary)] text-white py-12 animate-parallax-fade">
+        <div className="container mx-auto px-4">
+          <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
             {stats.map((stat, index) => (
               <div key={stat.label} className="text-center">
                 <div className="text-3xl font-bold md:text-4xl">
-                  <AnimatedCounter
-                    end={stat.value}
-                    suffix={stat.suffix}
-                    className="text-white"
-                  />
+                  <AnimatedCounter end={stat.value} suffix={stat.suffix} />
                 </div>
-                <p className="mt-2 text-sm text-white/80">{stat.label}</p>
+                <div className="mt-2 text-sm text-white/80">{stat.label}</div>
               </div>
             ))}
           </div>
@@ -201,7 +277,7 @@ export default function Home() {
           </p>
         </div>
         
-        <div className="mt-16 grid gap-8 md:grid-cols-3">
+        <div className="mt-16 grid gap-8 md:grid-cols-3 pb-16">
           {features.map((feature, index) => (
             <motion.div
               key={feature.title}
@@ -210,9 +286,9 @@ export default function Home() {
               transition={{ duration: 0.6, delay: index * 0.2 }}
               viewport={{ once: true }}
             >
-              <Card className="h-full text-center card-hover">
-                <CardHeader>
-                  <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-[var(--primary)]/10">
+              <Card className="border-0 shadow-none">
+                <CardHeader className="">
+                  <div className="flex h-16 w-16 items-center justify-center rounded bg-[var(--primary)]/5">
                     <feature.icon className="h-8 w-8 text-[var(--primary)]" />
                   </div>
                   <CardTitle className="mt-4 text-[var(--text)]">{feature.title}</CardTitle>
@@ -226,52 +302,85 @@ export default function Home() {
             </motion.div>
           ))}
         </div>
+
+
       </SectionWrapper>
 
       {/* Services Overview */}
-      <SectionWrapper background="muted">
+      <SectionWrapper>
         <div className="mx-auto max-w-3xl text-center">
-          <h2 className="text-3xl font-bold tracking-tight md:text-4xl text-[var(--text)]">
+          <h2 className="mt-6 text-lg text-[var(--muted)]" >
             Our Services
           </h2>
-          <p className="mt-6 text-lg text-[var(--muted)]">
-            Comprehensive engineering solutions tailored to meet your specific needs
+          <p className="text-3xl font-bold tracking-tight md:text-4xl text-[var(--text)]">
+            Tailored comprehensive engineering solutions
           </p>
         </div>
         
         <div className="mt-16 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {services.map((service, index) => (
-            <motion.div
-              key={service.title}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-              viewport={{ once: true }}
-            >
-              <Card className="h-full card-hover group">
-                <CardHeader>
-                  <div className="flex items-center space-x-3">
-                    <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-[var(--primary)]/10 group-hover:bg-[var(--primary)] group-hover:text-white transition-colors">
-                      <service.icon className="h-6 w-6" />
-                    </div>
-                    <CardTitle className="text-xl text-[var(--text)]">{service.title}</CardTitle>
+          {services.map((service, index) => {
+            // Professional service images from Pexels
+            const serviceImages = [
+              "https://images.pexels.com/photos/5726794/pexels-photo-5726794.jpeg?auto=compress&cs=tinysrgb&w=400", // NDT Testing - Industrial inspection
+              "https://images.pexels.com/photos/9324336/pexels-photo-9324336.jpeg?auto=compress&cs=tinysrgb&w=400", // Environmental Engineering - Green technology
+              "https://images.pexels.com/photos/5212317/pexels-photo-5212317.jpeg?auto=compress&cs=tinysrgb&w=400", // Academic Consulting - Research lab
+              "https://images.pexels.com/photos/5835359/pexels-photo-5835359.jpeg?auto=compress&cs=tinysrgb&w=400", // Industrial Solutions - Manufacturing
+              "https://images.pexels.com/photos/5726788/pexels-photo-5726788.jpeg?auto=compress&cs=tinysrgb&w=400", // Quality Assurance - Quality control
+              "https://images.pexels.com/photos/5726793/pexels-photo-5726793.jpeg?auto=compress&cs=tinysrgb&w=400", // Certification Support - Professional certification
+            ];
+            
+            // Generate ratings between 4.5 and 4.9
+            const ratings = [4.8, 4.6, 4.9, 4.7, 4.8, 4.9];
+            
+            return (
+              <motion.div
+                key={service.title}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                viewport={{ once: true }}
+              >
+                <Card className="h-full card-hover group overflow-hidden bg-white border border-gray-100 rounded-2xl shadow-sm hover:shadow-lg transition-all duration-300">
+                  {/* Service Image */}
+                  <div className="relative h-48 overflow-hidden">
+                    <img
+                      src={serviceImages[index]}
+                      alt={service.title}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
                   </div>
-                </CardHeader>
-                <CardContent>
-                  <CardDescription className="mb-4 text-base text-[var(--muted)]">
-                    {service.description}
-                  </CardDescription>
-                  <Link
-                    href={service.href}
-                    className="inline-flex items-center text-sm font-medium text-[var(--primary)] hover:text-[var(--primary)]/80"
-                  >
-                    Learn More
-                    <ChevronRight className="ml-1 h-4 w-4" />
-                  </Link>
-                </CardContent>
-              </Card>
-            </motion.div>
-          ))}
+                  
+                  <CardContent className="p-6">
+                    {/* Star Rating */}
+                    <div className="flex items-center space-x-1 mb-3">
+                      <Star className="h-4 w-4 fill-[var(--secondary)] text-[var(--secondary)]" />
+                      <span className="text-sm font-medium text-[var(--text)]">{ratings[index]}</span>
+                    </div>
+                    
+                    {/* Service Title */}
+                    <CardTitle className="text-xl font-bold text-[var(--text)] mb-3 group-hover:text-[var(--primary)] transition-colors">
+                      {service.title}
+                    </CardTitle>
+                    
+                    {/* Service Description */}
+                    <CardDescription className="text-[var(--muted)] text-sm leading-relaxed mb-4 line-clamp-3">
+                      {service.description}
+                    </CardDescription>
+                    
+                    {/* Learn More Link with Arrow */}
+                    <Link
+                      href={service.href}
+                      className="inline-flex items-center justify-between w-full text-sm font-medium text-[var(--primary)] hover:text-[var(--primary)]/80 group/link"
+                    >
+                      <span>Learn More</span>
+                      <ChevronRight className="h-4 w-4 group-hover/link:translate-x-1 transition-transform" />
+                    </Link>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            );
+          })}
         </div>
       </SectionWrapper>
 
@@ -303,7 +412,7 @@ export default function Home() {
                   viewport={{ once: true }}
                   className="flex items-center space-x-3"
                 >
-                  <CheckCircle className="h-5 w-5 text-[var(--accent)]" />
+                  <CheckCircle className="h-5 w-5 text-[var(--primary)]" />
                   <span className="text-[var(--text)]">{item}</span>
                 </motion.div>
               ))}
@@ -340,12 +449,12 @@ export default function Home() {
       </SectionWrapper>
 
       {/* Process Section */}
-      <SectionWrapper background="muted">
+      <SectionWrapper background="accent">
         <div className="mx-auto max-w-3xl text-center">
-          <h2 className="text-3xl font-bold tracking-tight md:text-4xl">
+          <h2 className="text-3xl font-bold tracking-tight md:text-4xl text-[var(--text)]">
             How We Deliver Excellence
           </h2>
-          <p className="mt-6 text-lg text-muted-foreground">
+          <p className="mt-6 text-lg text-[var(--muted)]">
             Our proven 4-step process ensures consistent, high-quality results
           </p>
         </div>
@@ -361,11 +470,11 @@ export default function Home() {
               className="relative"
             >
               <div className="text-center">
-                <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-primary text-primary-foreground text-xl font-bold">
+                <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-[var(--primary)] text-white text-xl font-bold">
                   {step.step}
                 </div>
-                <h3 className="mt-4 text-xl font-semibold">{step.title}</h3>
-                <p className="mt-2 text-muted-foreground">{step.description}</p>
+                <h3 className="mt-4 text-xl font-semibold text-[var(--text)]">{step.title}</h3>
+                <p className="mt-2 text-[var(--muted)]">{step.description}</p>
               </div>
               
               {index < processSteps.length - 1 && (
@@ -379,10 +488,10 @@ export default function Home() {
       {/* Testimonials */}
       <SectionWrapper>
         <div className="mx-auto max-w-3xl text-center">
-          <h2 className="text-3xl font-bold tracking-tight md:text-4xl">
-            What Our Clients Say
+          <h2 className="mt-6 text-lg text-[var(--muted)]   ">
+            Testimonials
           </h2>
-          <p className="mt-6 text-lg text-muted-foreground">
+          <p className="text-3xl font-bold tracking-tight md:text-4xl text-[var(--text)]">
             Trusted by industry leaders for exceptional engineering solutions
           </p>
         </div>
@@ -397,22 +506,79 @@ export default function Home() {
               viewport={{ once: true }}
             >
               <Card className="h-full card-hover">
-                <CardContent className="pt-6">
-                  <div className="flex mb-4">
-                    {[...Array(testimonial.rating)].map((_, i) => (
-                      <Star key={i} className="h-4 w-4 fill-warning text-warning" />
-                    ))}
-                  </div>
-                  <Quote className="h-8 w-8 text-muted-foreground mb-4" />
-                  <p className="text-muted-foreground mb-6">{testimonial.quote}</p>
-                  <div>
-                    <div className="font-semibold">{testimonial.author}</div>
-                    <div className="text-sm text-muted-foreground">
-                      {testimonial.title}, {testimonial.company}
+                  <CardContent className="pt-6">
+                    <div className="flex mb-4">
+                      {[...Array(testimonial.rating)].map((_, i) => (
+                        <Star key={i} className="h-4 w-4 fill-[var(--secondary)] text-[var(--secondary)]" />
+                      ))}
                     </div>
+                    <Quote className="h-8 w-8 text-[var(--muted)] mb-4" />
+                    <p className="text-[var(--muted)] mb-6">{testimonial.quote}</p>
+                    <div>
+                      <div className="font-semibold text-[var(--text)]">{testimonial.author}</div>
+                      <div className="text-sm text-[var(--muted)]">
+                        {testimonial.title}, {testimonial.company}
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+            </motion.div>
+          ))}
+        </div>
+      </SectionWrapper>
+
+      {/* Blog Section */}
+      <SectionWrapper>
+        <div className="mx-auto max-w-3xl text-center">
+          <p className="text-sm font-medium text-[var(--muted)] uppercase tracking-wide mb-4">
+            Blogs
+          </p>
+          <h2 className="text-3xl font-bold tracking-tight md:text-4xl text-[var(--text)]">
+            Stay updated with engineering excellence tips
+          </h2>
+        </div>
+        
+        <div className="mt-16 grid gap-8 md:grid-cols-4">
+          {blogPosts.map((post, index) => (
+            <motion.div
+              key={post.title}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: index * 0.1 }}
+              viewport={{ once: true }}
+            >
+              <Link href={post.href} className="group block">
+                <Card className="h-full overflow-hidden bg-white border border-gray-100 rounded-2xl shadow-none hover:shadow-lg transition-all duration-300 group-hover:-translate-y-1">
+                  {/* Blog Image */}
+                  <div className="relative h-48 overflow-hidden">
+                    <img
+                      src={post.image}
+                      alt={post.title}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
                   </div>
-                </CardContent>
-              </Card>
+                  
+                  <CardContent className="p-6">
+                    {/* Blog Title */}
+                    <CardTitle className="text-xl font-bold text-[var(--text)] mb-4 group-hover:text-[var(--primary)] transition-colors leading-tight">
+                      {post.title}
+                    </CardTitle>
+                    
+                    {/* Date and Read Time */}
+                    <div className="flex items-center space-x-4 text-sm text-[var(--muted)]">
+                      <div className="flex items-center space-x-1">
+                        <Calendar className="h-4 w-4" />
+                        <span>{post.date}</span>
+                      </div>
+                      <div className="flex items-center space-x-1">
+                        <Clock className="h-4 w-4" />
+                        <span>{post.readTime}</span>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </Link>
             </motion.div>
           ))}
         </div>
@@ -421,21 +587,21 @@ export default function Home() {
       {/* CTA Section */}
       <SectionWrapper background="gradient" className="text-white">
         <div className="mx-auto max-w-3xl text-center">
-          <h2 className="text-3xl font-bold tracking-tight md:text-4xl">
+          <h2 className="text-3xl font-bold tracking-tight md:text-4xl text-text">
             Ready to Start Your Project?
           </h2>
-          <p className="mt-6 text-lg text-blue-100">
+          <p className="mt-6 text-lg text-text">
             Get in touch with our experts for a consultation and discover how we can help 
             achieve your engineering goals.
           </p>
           <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:justify-center">
-            <Button asChild size="lg" className="bg-white text-primary hover:bg-white/90">
+            <Button asChild size="lg" className="bg-white text-[var(--primary)] hover:bg-white/90">
               <Link href="/contact">
                 Get Started Today
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
             </Button>
-            <Button asChild variant="outline" size="lg" className="border-white text-white hover:bg-white hover:text-primary">
+            <Button asChild variant="outline" size="lg" className="border-white text-white hover:bg-white hover:text-[var(--primary)]">
               <Link href="/about">Learn More About Us</Link>
             </Button>
           </div>

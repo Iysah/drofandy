@@ -7,7 +7,7 @@ interface SectionWrapperProps {
   children: React.ReactNode
   className?: string
   id?: string
-  background?: "default" | "muted" | "gradient"
+  background?: "default" | "muted" | "accent" | "gradient" | "primary"
 }
 
 export function SectionWrapper({
@@ -19,7 +19,9 @@ export function SectionWrapper({
   const backgroundClasses = {
     default: "",
     muted: "bg-muted/50",
+    accent: "bg-accent",
     gradient: "gradient-hero",
+    primary: "bg-primary"
   }
 
   return (

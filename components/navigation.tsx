@@ -51,10 +51,10 @@ export function Navigation() {
         {/* Logo */}
         <Link href="/" className="flex items-center space-x-2" onClick={closeMenu}>
           <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-primary-foreground">
-            <span className="text-sm font-bold">EE</span>
+            <span className="text-sm font-bold">DF</span>
           </div>
-          <span className="hidden font-bold sm:inline-block">
-            Engineering Excellence
+          <span className="hidden font-bold sm:inline-block text-text">
+            Drofandy
           </span>
         </Link>
 
@@ -73,7 +73,7 @@ export function Navigation() {
                   "flex items-center space-x-1 text-sm font-medium transition-colors hover:text-primary",
                   pathname === item.href
                     ? "text-primary"
-                    : "text-muted-foreground"
+                    : "text-text"
                 )}
               >
                 <span>{item.title}</span>
@@ -97,7 +97,7 @@ export function Navigation() {
                         <Link
                           key={child.href}
                           href={child.href}
-                          className="block rounded-md px-3 py-2 text-sm text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+                          className="block rounded-md px-3 py-2 text-sm text-text transition-colors hover:bg-muted hover:text-foreground"
                         >
                           {child.title}
                         </Link>

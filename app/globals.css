@@ -2,12 +2,12 @@
 
 :root {
   /* New Color Scheme */
-  --primary: #0066cc;
+  --primary: rgb(48, 114, 255);
   --secondary: #ff9900;
   --background: #ffffff;
   --text: #333333;
   --muted: #777777;
-  --accent: #00cc99;
+  --accent: rgb(245, 248, 255);
   --foreground: var(--text);
 }
 
@@ -25,10 +25,10 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
+    --background: #ffffff;
     --foreground: #ededed;
-    --text: #ededed;
-    --muted: #999999;
+    --text: #333333;
+    --muted: #777777;
   }
 }
 

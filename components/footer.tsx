@@ -45,7 +45,7 @@ export function Footer() {
               <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-primary-foreground">
                 <span className="text-sm font-bold">EE</span>
               </div>
-              <span className="font-bold">Engineering Excellence</span>
+              <span className="font-bold">Drofandy</span>
             </Link>
             <p className="mt-4 text-sm text-muted-foreground">
               Comprehensive NDT, Environmental Engineering, and Academic Consulting Solutions. 
@@ -58,7 +58,7 @@ export function Footer() {
               </div>
               <div className="flex items-center space-x-2 text-sm text-muted-foreground">
                 <Mail className="h-4 w-4" />
-                <span>info@engineering-excellence.com</span>
+                <span>info@drofandy.com</span>
               </div>
               <div className="flex items-center space-x-2 text-sm text-muted-foreground">
                 <MapPin className="h-4 w-4" />
