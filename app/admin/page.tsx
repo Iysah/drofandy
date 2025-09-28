@@ -24,7 +24,21 @@ import {
 import Link from 'next/link';
 
 export default function AdminDashboard() {
-  const { user, signOut } = useAuth();
+  // Handle auth context safely during build/pre-rendering
+  let user = null;
+  let signOut = async () => {};
+  let authLoading = true;
+  
+  try {
+    const authContext = useAuth();
+    user = authContext.user;
+    signOut = authContext.signOut;
+    authLoading = authContext.loading;
+  } catch (error) {
+    // During build/pre-rendering, auth context might not be available
+    console.log('Auth context not available during build');
+  }
+
   const [posts, setPosts] = useState<BlogPost[]>([]);
   const [contacts, setContacts] = useState<ContactForm[]>([]);
   const [loading, setLoading] = useState(true);
@@ -74,6 +88,26 @@ export default function AdminDashboard() {
     }
   };
 
+  // Show loading state while auth is loading
+  if (authLoading) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 flex items-center justify-center">
+        <Card className="w-full max-w-md p-8">
+          <div className="text-center space-y-6">
+            <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto animate-pulse">
+              <Settings className="w-8 h-8 text-blue-600" />
+            </div>
+            <div>
+              <h1 className="text-2xl font-bold text-slate-900 mb-2">Loading...</h1>
+              <p className="text-slate-600">Checking authentication status...</p>
+            </div>
+          </div>
+        </Card>
+      </div>
+    );
+  }
+
+  // Show login prompt if not authenticated
   if (!user) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 flex items-center justify-center">
