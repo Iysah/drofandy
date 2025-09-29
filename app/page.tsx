@@ -175,6 +175,109 @@ const blogPosts = [
   },
 ]
 
+const projectGallery = [
+  {
+    id: 1,
+    title: "Industrial Pipeline Inspection",
+    image: "https://images.pexels.com/photos/162568/pipes-industrial-tubes-industrial-162568.jpeg?auto=compress&cs=tinysrgb&w=600",
+  },
+  {
+    id: 2,
+    title: "Structural Steel Analysis",
+    image: "https://images.pexels.com/photos/236705/pexels-photo-236705.jpeg?auto=compress&cs=tinysrgb&w=600",
+  },
+  {
+    id: 3,
+    title: "Environmental Monitoring System",
+    image: "https://images.pexels.com/photos/2280549/pexels-photo-2280549.jpeg?auto=compress&cs=tinysrgb&w=600",
+  },
+  {
+    id: 4,
+    title: "Bridge Infrastructure Assessment",
+    image: "https://images.pexels.com/photos/1005644/pexels-photo-1005644.jpeg?auto=compress&cs=tinysrgb&w=600",
+  },
+  {
+    id: 5,
+    title: "Manufacturing Quality Control",
+    image: "https://images.pexels.com/photos/1108101/pexels-photo-1108101.jpeg?auto=compress&cs=tinysrgb&w=600",
+  },
+  {
+    id: 6,
+    title: "Pressure Vessel Testing",
+    image: "https://images.pexels.com/photos/1108572/pexels-photo-1108572.jpeg?auto=compress&cs=tinysrgb&w=600",
+  },
+  {
+    id: 7,
+    title: "Welding Joint Inspection",
+    image: "https://images.pexels.com/photos/1108717/pexels-photo-1108717.jpeg?auto=compress&cs=tinysrgb&w=600",
+  },
+  {
+    id: 8,
+    title: "Concrete Structure Analysis",
+    image: "https://images.pexels.com/photos/1216589/pexels-photo-1216589.jpeg?auto=compress&cs=tinysrgb&w=600",
+  },
+  {
+    id: 9,
+    title: "Electrical System Audit",
+    image: "https://images.pexels.com/photos/257736/pexels-photo-257736.jpeg?auto=compress&cs=tinysrgb&w=600",
+  },
+  {
+    id: 10,
+    title: "Mechanical Component Testing",
+    image: "https://images.pexels.com/photos/1108099/pexels-photo-1108099.jpeg?auto=compress&cs=tinysrgb&w=600",
+  },
+  {
+    id: 11,
+    title: "Water Treatment Facility",
+    image: "https://images.pexels.com/photos/1108572/pexels-photo-1108572.jpeg?auto=compress&cs=tinysrgb&w=600",
+  },
+  {
+    id: 12,
+    title: "Solar Panel Installation",
+    image: "https://images.pexels.com/photos/433308/pexels-photo-433308.jpeg?auto=compress&cs=tinysrgb&w=600",
+  },
+  {
+    id: 13,
+    title: "HVAC System Design",
+    image: "https://images.pexels.com/photos/1108717/pexels-photo-1108717.jpeg?auto=compress&cs=tinysrgb&w=600",
+  },
+  {
+    id: 14,
+    title: "Chemical Plant Safety Audit",
+    image: "https://images.pexels.com/photos/1108101/pexels-photo-1108101.jpeg?auto=compress&cs=tinysrgb&w=600",
+  },
+  {
+    id: 15,
+    title: "Turbine Blade Inspection",
+    image: "https://images.pexels.com/photos/1108099/pexels-photo-1108099.jpeg?auto=compress&cs=tinysrgb&w=600",
+  },
+  {
+    id: 16,
+    title: "Geotechnical Site Investigation",
+    image: "https://images.pexels.com/photos/1216589/pexels-photo-1216589.jpeg?auto=compress&cs=tinysrgb&w=600",
+  },
+  {
+    id: 17,
+    title: "Automotive Parts Testing",
+    image: "https://images.pexels.com/photos/257736/pexels-photo-257736.jpeg?auto=compress&cs=tinysrgb&w=600",
+  },
+  {
+    id: 18,
+    title: "Aerospace Component Analysis",
+    image: "https://images.pexels.com/photos/236705/pexels-photo-236705.jpeg?auto=compress&cs=tinysrgb&w=600",
+  },
+  {
+    id: 19,
+    title: "Oil Rig Structural Assessment",
+    image: "https://images.pexels.com/photos/162568/pipes-industrial-tubes-industrial-162568.jpeg?auto=compress&cs=tinysrgb&w=600",
+  },
+  {
+    id: 20,
+    title: "Nuclear Facility Inspection",
+    image: "https://images.pexels.com/photos/2280549/pexels-photo-2280549.jpeg?auto=compress&cs=tinysrgb&w=600",
+  },
+]
+
 export default function Home() {
   return (
     <div className="min-h-screen">
@@ -489,6 +592,58 @@ export default function Home() {
               )}
             </motion.div>
           ))}
+        </div>
+      </SectionWrapper>
+
+      {/* Project Gallery */}
+      <SectionWrapper>
+        <div className="mx-auto max-w-3xl text-center">
+          <h2 className="text-3xl font-bold tracking-tight md:text-4xl text-[var(--text)]">
+            Our Project Portfolio
+          </h2>
+          <p className="mt-4 text-lg text-[var(--muted)]">
+            Explore our comprehensive collection of engineering excellence across diverse industries and applications
+          </p>
+        </div>
+        
+        <div className="mt-16 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 md:gap-6">
+          {projectGallery.map((project, index) => (
+            <motion.div
+              key={project.id}
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5, delay: index * 0.05 }}
+              viewport={{ once: true }}
+              className="group relative aspect-square overflow-hidden rounded-lg bg-gray-100 cursor-pointer"
+            >
+              {/* Project Image */}
+              <img
+                src={project.image}
+                alt={project.title}
+                className="h-full w-full object-cover transition-all duration-300 group-hover:scale-110"
+              />
+              
+              {/* Hover Overlay */}
+              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/60 transition-all duration-300 flex items-center justify-center">
+                <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-center px-4">
+                  <h3 className="text-white font-semibold text-sm md:text-base leading-tight">
+                    {project.title}
+                  </h3>
+                </div>
+              </div>
+              
+              {/* Subtle border on hover */}
+              <div className="absolute inset-0 border-2 border-transparent group-hover:border-[var(--primary)]/30 rounded-lg transition-all duration-300" />
+            </motion.div>
+          ))}
+        </div>
+        
+        {/* View All Projects Button */}
+        <div className="mt-12 text-center">
+          <Button variant="outline" size="lg" className="group">
+            View All Projects
+            <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+          </Button>
         </div>
       </SectionWrapper>
 
