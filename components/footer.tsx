@@ -15,7 +15,7 @@ const footerLinks = {
     { title: "Careers", href: "/careers" },
   ],
   resources: [
-    { title: "Blog", href: "/blog" },
+    { title: "News", href: "/blog" },
     { title: "Case Studies", href: "/case-studies" },
     { title: "White Papers", href: "/resources" },
     { title: "Industry News", href: "/blog?category=industry" },

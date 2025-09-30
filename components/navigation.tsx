@@ -28,7 +28,7 @@ const navigationItems = [
     href: "/about",
   },
   {
-    title: "Blog",
+    title: "News",
     href: "/blog",
   },
   {
@@ -113,7 +113,7 @@ export function Navigation() {
         {/* CTA Button */}
         <div className="hidden md:flex">
           <Button asChild size="sm">
-            <Link href="/contact">Get Consultation</Link>
+            <Link href="/contact">Request Qoute</Link>
           </Button>
         </div>
 
