@@ -43,26 +43,27 @@ export function Footer() {
           <div className="lg:col-span-2">
             <Link href="/" className="flex items-center space-x-2">
               <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-primary-foreground">
-                <span className="text-sm font-bold">EE</span>
+                <span className="text-sm font-bold">DG</span>
               </div>
-              <span className="font-bold">Drofandy</span>
+              <span className="font-bold">DROFANDY Group Inc.</span>
             </Link>
             <p className="mt-4 text-sm text-muted-foreground">
-              Comprehensive NDT, Environmental Engineering, and Academic Consulting Solutions. 
-              Professional engineering services with precision testing and research-backed expertise.
+              Expert consultancy across three core sectors: non-destructive examination and inspection, 
+              environmental engineering, and educational support. Delivering reliable industrial solutions 
+              and strategic academic guidance.
             </p>
             <div className="mt-6 space-y-2">
               <div className="flex items-center space-x-2 text-sm text-muted-foreground">
                 <Phone className="h-4 w-4" />
-                <span>+1 (555) 123-4567</span>
+                <span>Alford: (780) 880-7279 | Sandra: (780) 880-3674</span>
               </div>
               <div className="flex items-center space-x-2 text-sm text-muted-foreground">
                 <Mail className="h-4 w-4" />
-                <span>info@drofandy.com</span>
+                <span>akukaigwe@drofandy.com</span>
               </div>
               <div className="flex items-center space-x-2 text-sm text-muted-foreground">
                 <MapPin className="h-4 w-4" />
-                <span>123 Engineering Way, Tech City, TC 12345</span>
+                <span>1015 Street SW, Edmonton, Alberta T6W 2S4</span>
               </div>
             </div>
           </div>
@@ -140,7 +141,7 @@ export function Footer() {
         <div className="mt-12 flex flex-col items-center justify-between border-t pt-8 md:flex-row">
           <div className="flex flex-col items-center space-y-2 md:flex-row md:space-x-6 md:space-y-0">
             <p className="text-sm text-muted-foreground">
-              © 2024 Engineering Excellence. All rights reserved.
+              © 2025 DROFANDY Group Inc. All rights reserved.
             </p>
             <div className="flex space-x-4 text-sm">
               <Link href="/privacy" className="text-muted-foreground hover:text-foreground">

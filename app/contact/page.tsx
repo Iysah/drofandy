@@ -95,70 +95,70 @@ Project Details:
     {
       icon: Phone,
       title: 'Phone',
-      details: ['+1 (555) 123-4567', '+1 (555) 123-4568 (Emergency)'],
-      description: 'Available 24/7 for emergency services'
+      details: ['Alford Ukaigwe: (780) 880-7279', 'Sandra Ukaigwe: (780) 880-3674'],
+      description: 'Available for consultation and project inquiries'
     },
     {
       icon: Mail,
       title: 'Email',
-      details: ['info@engineeringexcellence.com', 'emergency@engineeringexcellence.com'],
-      description: 'We respond within 2 hours during business days'
+      details: ['akukaigwe@drofandy.com', 'sukaigwe@drofandy.com'],
+      description: 'We respond within 24 hours during business days'
     },
     {
       icon: MapPin,
       title: 'Address',
-      details: ['123 Engineering Way', 'Tech City, TC 12345', 'United States'],
-      description: 'Visit our state-of-the-art facility'
+      details: ['1015 Street SW', 'Edmonton, Alberta T6W 2S4', 'Canada'],
+      description: 'Visit our professional consulting office'
     },
     {
       icon: Clock,
       title: 'Business Hours',
-      details: ['Monday - Friday: 8:00 AM - 6:00 PM', 'Saturday: 9:00 AM - 2:00 PM', 'Sunday: Emergency Only'],
-      description: 'Extended hours available for urgent projects'
+      details: ['Monday - Friday: 8:00 AM - 6:00 PM', 'Saturday: 9:00 AM - 2:00 PM', 'Sunday: By Appointment'],
+      description: 'Flexible scheduling available for client needs'
     }
   ];
 
   const serviceAreas = [
     {
       region: 'Primary Service Area',
-      locations: ['Tech City Metropolitan Area', 'Innovation Valley', 'Engineering District'],
+      locations: ['Edmonton Metropolitan Area', 'Calgary Region', 'Fort McMurray Industrial Area'],
       responseTime: '2-4 hours',
       coverage: 'Full service coverage'
     },
     {
       region: 'Extended Service Area',
-      locations: ['State Capital Region', 'Industrial Corridor', 'University District'],
+      locations: ['Alberta Province', 'Saskatchewan', 'British Columbia'],
       responseTime: '4-8 hours',
       coverage: 'Most services available'
     },
     {
       region: 'National Projects',
-      locations: ['Major Cities Nationwide', 'Industrial Centers', 'Academic Institutions'],
+      locations: ['Major Canadian Cities', 'Industrial Centers', 'Academic Institutions'],
       responseTime: '1-3 days',
-      coverage: 'Specialized services and consulting'
+      coverage: 'Specialized consulting and inspection services'
     }
   ];
 
   const whyChooseUs = [
     {
       icon: Award,
-      title: 'Industry Expertise',
-      description: '15+ years of engineering excellence with proven track record'
+      title: 'Multidisciplinary Expertise',
+      description: 'Comprehensive consultancy across NDE, environmental engineering, and education'
     },
     {
       icon: Users,
-      title: 'Expert Team',
-      description: '100+ certified engineers and technical specialists'
+      title: 'Certified Professionals',
+      description: 'ABSA, API, CWB, and NACE certified inspectors and consultants'
     },
     {
       icon: CheckCircle,
-      title: 'Quality Assurance',
-      description: 'ISO certified processes and rigorous quality standards'
+      title: 'Quality Standards',
+      description: 'Rigorous quality assurance and industry-leading safety protocols'
     },
     {
       icon: Globe,
-      title: 'Comprehensive Services',
-      description: 'Full-spectrum engineering solutions under one roof'
+      title: 'Three Core Sectors',
+      description: 'Industrial inspection, environmental solutions, and educational consulting'
     }
   ];
 
@@ -179,8 +179,8 @@ Project Details:
               Get in <span className="text-primary">Touch</span>
             </h1>
             <p className="text-xl text-muted mb-8 leading-relaxed">
-              Ready to start your next engineering project? Contact our expert team 
-              for professional consultation and innovative solutions.
+              Ready to start your next project? Contact DROFANDY Group Inc. for expert 
+              consultancy in NDE inspection, environmental engineering, and educational support.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <Badge variant="secondary" className="text-lg px-4 py-2">

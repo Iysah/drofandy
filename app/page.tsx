@@ -36,57 +36,45 @@ const stats = [
 const features = [
   {
     icon: Microscope,
-    title: "Precision Testing",
-    description: "Advanced NDT methodologies with state-of-the-art equipment for accurate, non-destructive analysis.",
+    title: "Non-Destructive Examination",
+    description: "Legacy and advanced NDE services with state-of-the-art equipment for accurate, reliable industrial asset integrity management.",
   },
   {
     icon: Leaf,
-    title: "Environmental Solutions",
-    description: "Sustainable engineering practices that protect our environment while meeting industry standards.",
+    title: "Environmental Engineering",
+    description: "Innovative, cost-effective solutions for municipal, industrial, and commercial clients with focus on sustainable infrastructure.",
   },
   {
     icon: GraduationCap,
-    title: "Academic Excellence",
-    description: "Research-backed consulting services with cutting-edge methodologies and proven results.",
+    title: "Educational Consulting",
+    description: "Strategic academic planning and individualized support for diverse students throughout their academic lifecycle.",
   },
 ]
 
 const services = [
   {
     icon: Microscope,
-    title: "NDT Testing",
-    description: "Comprehensive non-destructive testing services including ultrasonic, radiographic, and magnetic particle testing.",
-    href: "/services/ndt",
+    title: "Non-Destructive Examination (NDE) Services",
+    description: "Comprehensive testing services blending time-tested techniques with latest NDE technologies including ultrasonic, radiographic, magnetic particle, and automated testing.",
+    href: "/services/nde",
+  },
+  {
+    icon: Shield,
+    title: "Comprehensive Inspection Services",
+    description: "Certified assessment services including pressure equipment inspection, API certifications, CWB welding inspection, and specialized industrial inspections.",
+    href: "/services/inspection",
   },
   {
     icon: Leaf,
-    title: "Environmental Engineering",
-    description: "Environmental impact assessments, remediation planning, and sustainable engineering solutions.",
+    title: "Environmental Engineering Consultancy",
+    description: "Water & wastewater system design, lagoon management, advanced treatment technologies, and regulatory compliance solutions.",
     href: "/services/environmental",
   },
   {
     icon: GraduationCap,
-    title: "Academic Consulting",
-    description: "Research collaboration, technical writing, and academic project consulting services.",
-    href: "/services/academic",
-  },
-  {
-    icon: Settings,
-    title: "Industrial Solutions",
-    description: "Custom engineering solutions for manufacturing, quality control, and process optimization.",
-    href: "/services/industrial",
-  },
-  {
-    icon: Shield,
-    title: "Quality Assurance",
-    description: "Comprehensive quality management systems and compliance consulting services.",
-    href: "/services/quality",
-  },
-  {
-    icon: Award,
-    title: "Certification Support",
-    description: "Assistance with industry certifications, standards compliance, and regulatory requirements.",
-    href: "/services/certification",
+    title: "Educational Consulting Services",
+    description: "Academic transition support, success strategy development, and personalized educational planning for diverse student populations.",
+    href: "/services/educational",
   },
 ]
 
@@ -115,31 +103,31 @@ const processSteps = [
 
 const testimonials = [
   {
-    quote: "Engineering Excellence delivered exceptional NDT services that exceeded our expectations. Their attention to detail and professional approach made all the difference.",
+    quote: "DROFANDY Group Inc. delivered exceptional NDE services that exceeded our expectations. Their attention to detail and professional approach made all the difference.",
     author: "Sarah Johnson",
     title: "Quality Manager",
     company: "TechCorp Industries",
     rating: 5,
   },
   {
-    quote: "The environmental engineering solutions provided by this team helped us achieve compliance while reducing costs. Highly recommended for any industrial project.",
+    quote: "The environmental engineering solutions provided by DROFANDY helped us achieve compliance while reducing costs. Highly recommended for any industrial project.",
     author: "Michael Chen",
     title: "Operations Director",
     company: "GreenTech Manufacturing",
     rating: 5,
   },
   {
-    quote: "Their academic consulting services were instrumental in our research project success. The expertise and guidance provided were invaluable.",
+    quote: "Their educational consulting services were instrumental in our academic success. The expertise and guidance provided were invaluable for our students.",
     author: "Dr. Emily Rodriguez",
-    title: "Research Director",
+    title: "Academic Director",
     company: "Innovation University",
     rating: 5,
   },
   {
-    quote: "Their academic consulting services were instrumental in our research project success. The expertise and guidance provided were invaluable.",
-    author: "Dr. Emily John",
-    title: "Research Director",
-    company: "Innovation University",
+    quote: "DROFANDY's comprehensive inspection services helped us maintain the highest safety standards. Their certified inspectors are truly professional.",
+    author: "Robert Wilson",
+    title: "Plant Manager",
+    company: "Industrial Solutions Corp",
     rating: 5,
   },
 ]
@@ -291,17 +279,17 @@ export default function Home() {
             <div className="animate-fade-up">
               <div className="mb-4">
                 <span className="text-[var(--muted)] text-sm font-medium tracking-wide uppercase">
-                  Professional engineering solutions
+                  DROFANDY Group Inc.
                 </span>
               </div>
               
               <h1 className="text-4xl font-bold tracking-tight text-[var(--text)] md:text-5xl lg:text-6xl mb-6">
-                Engineering Excellence Through{" "}
-                <span className="text-[var(--primary)]">Innovation</span>
+                Expert Consultancy Across{" "}
+                <span className="text-[var(--primary)]">Three Core Sectors</span>
               </h1>
               
               <p className="text-lg text-[var(--muted)] mb-8 max-w-xl">
-                Comprehensive NDT, Environmental, and Academic Engineering Solutions designed to meet your unique needs. From preventive checkups to advanced analysis, excellence and confidence are always at their best.
+                DROFANDY Group Inc. delivers expert consultancy across non-destructive examination and inspection, environmental engineering, and educational support. We provide reliable industrial solutions and strategic academic guidance.
               </p>
               
               <div className="flex flex-col sm:flex-row gap-4 mb-8 animate-fade-up-delay">
@@ -320,7 +308,7 @@ export default function Home() {
                   </div>
                   <div>
                     <div className="text-sm font-medium">Contact us</div>
-                    <div className="text-sm text-[var(--muted)]">(555) 123-4567</div>
+                    <div className="text-sm text-[var(--muted)]">(780) 880-7279</div>
                   </div>
                 </div>
               </div>
@@ -379,11 +367,10 @@ export default function Home() {
       <SectionWrapper>
         <div className="mx-auto max-w-3xl text-center">
           <h2 className="text-3xl font-bold tracking-tight md:text-4xl text-[var(--text)]">
-            A commitment to engineering excellence
+            Multidisciplinary Excellence Across Three Sectors
           </h2>
           <p className="mt-6 text-lg text-[var(--muted)]">
-            We deliver precision, innovation, and reliability in every project, 
-            combining cutting-edge technology with decades of expertise.
+            We combine technical expertise in industrial asset integrity management with environmental engineering solutions and academic success strategies, delivering precision in testing, excellence in engineering, and quality educational support.
           </p>
         </div>
         
