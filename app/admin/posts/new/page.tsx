@@ -21,6 +21,7 @@ import {
   FileText
 } from 'lucide-react';
 import Link from 'next/link';
+import { uploadImage, deleteFile } from '@/lib/storage'
 
 interface BlogPostForm {
   title: string;
@@ -30,6 +31,7 @@ interface BlogPostForm {
   category: string;
   tags: string[];
   published: boolean;
+  featuredImage?: string;
 }
 
 const categories = [
@@ -48,6 +50,7 @@ export default function NewBlogPost() {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [newTag, setNewTag] = useState('');
+  const [featuredUploading, setFeaturedUploading] = useState(false)
   const [form, setForm] = useState<BlogPostForm>({
     title: '',
     slug: '',
@@ -249,6 +252,81 @@ export default function NewBlogPost() {
                     {form.content.split(/\s+/).filter(word => word.length > 0).length} words • 
                     ~{calculateReadingTime(form.content)} min read
                   </p>
+                </div>
+
+                {/* Featured Image / Video */}
+                <div>
+                  <label className="block text-sm font-medium text-slate-700 mb-2">
+                    Featured image / video
+                  </label>
+                  <div className="flex items-center space-x-2">
+                    <input
+                      type="file"
+                      accept="image/*,video/*"
+                      onChange={async (e) => {
+                        const file = e.target.files?.[0]
+                        if (!file) return
+                        try {
+                          setFeaturedUploading(true)
+                          const res: any = await uploadImage(file, 'blog')
+                          // Cloudinary returns secure_url and public_id
+                          const url = res?.secure_url || res?.url
+                          const public_id = res?.public_id
+                          if (url) {
+                            setForm(prev => ({ ...prev, featuredImage: url }))
+                            // store public_id on window for potential deletes (optional)
+                            ;(window as any).__featured_public_id = public_id
+                          }
+                        } catch (err) {
+                          console.error('Upload failed', err)
+                          alert('Upload failed. See console for details.')
+                        } finally {
+                          setFeaturedUploading(false)
+                        }
+                      }}
+                    />
+                    {featuredUploading ? (
+                      <span className="text-sm text-slate-500">Uploading…</span>
+                    ) : (
+                      <span className="text-sm text-slate-500">Select an image or video to upload to Cloudinary</span>
+                    )}
+                  </div>
+
+                  {form.featuredImage && (
+                    <div className="mt-3">
+                      <div className="w-full max-w-sm">
+                        {form.featuredImage.includes('/video') || form.featuredImage.endsWith('.mp4') ? (
+                          <video src={form.featuredImage} controls className="w-full rounded-md" />
+                        ) : (
+                          <img src={form.featuredImage} alt="Featured" className="w-full rounded-md" />
+                        )}
+                        <div className="flex items-center mt-2 space-x-2">
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            onClick={async () => {
+                              const public_id = (window as any).__featured_public_id
+                              if (!public_id) {
+                                // simply remove url if we don't have public_id
+                                setForm(prev => ({ ...prev, featuredImage: undefined }))
+                                return
+                              }
+                              try {
+                                await deleteFile(public_id, form.featuredImage?.includes('video') ? 'video' : 'image')
+                                setForm(prev => ({ ...prev, featuredImage: undefined }))
+                                delete (window as any).__featured_public_id
+                              } catch (err) {
+                                console.error('Delete failed', err)
+                                alert('Failed to delete asset. See console for details.')
+                              }
+                            }}
+                          >
+                            Remove
+                          </Button>
+                        </div>
+                      </div>
+                    </div>
+                  )}
                 </div>
               </div>
             </Card>

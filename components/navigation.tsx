@@ -4,7 +4,7 @@ import * as React from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { motion, AnimatePresence } from "framer-motion"
-import { Menu, X, ChevronDown } from "lucide-react"
+import { Menu, X, ChevronDown, Clock } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 
@@ -47,6 +47,22 @@ export function Navigation() {
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+      {/* contact information */}
+      <div className="w-full bg-primary text-primary-foreground">
+        <div className="container mx-auto flex h-10 items-center justify-between px-4 text-sm">
+          <div className="flex items-center space-x-4">
+            <a href="tel:+1234567890" className="hover:underline">Phone: +1 (234) 567-890</a>
+            <span className="hidden sm:inline">•</span>
+            <a href="mailto:info@example.com" className="hover:underline">info@example.com</a>
+          </div>
+
+          <div className="hidden sm:flex items-center space-x-2">
+            <Clock className="h-4 w-4" />
+            <span>Mon — Fri: 9:00 — 17:00</span>
+          </div>
+        </div>
+      </div>
+
       <nav className="container mx-auto flex h-16 items-center justify-between px-4">
         {/* Logo */}
         <Link href="/" className="flex items-center space-x-2" onClick={closeMenu}>

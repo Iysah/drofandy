@@ -120,14 +120,66 @@ export default function AdminDashboard() {
               <h1 className="text-2xl font-bold text-slate-900 mb-2">Admin Access Required</h1>
               <p className="text-slate-600">Please sign in to access the admin dashboard.</p>
             </div>
-            <Button className="w-full">
-              Sign In with Google
-            </Button>
+            <EmailPasswordSignIn />
           </div>
         </Card>
       </div>
     );
   }
+
+
+function EmailPasswordSignIn() {
+  const { signIn } = useAuth()
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState<string | null>(null)
+
+  const submit = async (e?: React.FormEvent) => {
+    e?.preventDefault()
+    setError(null)
+    setLoading(true)
+    try {
+      await signIn(email, password)
+    } catch (err: any) {
+      console.error('Sign in error', err)
+      setError(err.message || 'Failed to sign in')
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  return (
+    <form onSubmit={submit} className="space-y-4">
+      <div>
+        <label className="block text-start text-sm font-medium text-slate-700 mb-1">Email</label>
+        <input
+          type="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder="you@company.com"
+          required
+          className="w-full px-3 py-2 border border-slate-300 rounded-md text-slate-700 placeholder-slate-400"
+        />
+      </div>
+      <div>
+        <label className="block text-start text-sm font-medium text-slate-700 mb-1">Password</label>
+        <input
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          placeholder="Password"
+          required
+          className="w-full px-3 py-2 border border-slate-300 rounded-md text-slate-700 placeholder-slate-400"
+        />
+      </div>
+      {error && <p className="text-sm text-red-600">{error}</p>}
+      <Button type="submit" className="w-full" disabled={loading}>
+        {loading ? 'Signing in…' : 'Sign in'}
+      </Button>
+    </form>
+  )
+}
 
   const stats = {
     totalPosts: posts.length,

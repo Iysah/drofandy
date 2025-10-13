@@ -1,103 +1,62 @@
-import { 
-  ref, 
-  uploadBytes, 
-  uploadBytesResumable, 
-  getDownloadURL, 
-  deleteObject,
-  listAll,
-  UploadTask
-} from 'firebase/storage'
-import { storage } from './firebase'
+// Client-side storage helpers now use Cloudinary via server API routes.
 
-// Upload file to Firebase Storage
-export async function uploadFile(
-  file: File, 
-  path: string, 
-  onProgress?: (progress: number) => void
-): Promise<string> {
-  const storageRef = ref(storage, path)
-  
-  if (onProgress) {
-    // Use resumable upload for progress tracking
-    const uploadTask: UploadTask = uploadBytesResumable(storageRef, file)
-    
-    return new Promise((resolve, reject) => {
-      uploadTask.on(
-        'state_changed',
-        (snapshot) => {
-          const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-          onProgress(progress)
-        },
-        (error) => {
-          reject(error)
-        },
-        async () => {
-          try {
-            const downloadURL = await getDownloadURL(uploadTask.snapshot.ref)
-            resolve(downloadURL)
-          } catch (error) {
-            reject(error)
-          }
-        }
-      )
-    })
-  } else {
-    // Simple upload without progress tracking
-    const snapshot = await uploadBytes(storageRef, file)
-    return await getDownloadURL(snapshot.ref)
-  }
-}
-
-// Upload image with automatic path generation
+// Upload image using the server upload endpoint which forwards to Cloudinary
 export async function uploadImage(
-  file: File, 
+  file: File,
   folder: 'blog' | 'team' | 'projects' | 'general' = 'general',
   onProgress?: (progress: number) => void
-): Promise<string> {
-  // Generate unique filename
-  const timestamp = Date.now()
-  const extension = file.name.split('.').pop()
-  const filename = `${timestamp}.${extension}`
-  const path = `images/${folder}/${filename}`
-  
-  return uploadFile(file, path, onProgress)
+): Promise<any> {
+  const form = new FormData()
+  form.append('file', file)
+  form.append('folder', folder)
+  form.append('resource_type', file.type.startsWith('video') ? 'video' : 'image')
+
+  const res = await fetch('/api/media/upload', {
+    method: 'POST',
+    body: form
+  })
+
+  if (!res.ok) throw new Error('Upload failed')
+  const data = await res.json()
+  return data.result
 }
 
-// Upload document
 export async function uploadDocument(
-  file: File, 
+  file: File,
   folder: 'reports' | 'certificates' | 'documents' = 'documents',
   onProgress?: (progress: number) => void
-): Promise<string> {
-  const timestamp = Date.now()
-  const extension = file.name.split('.').pop()
-  const filename = `${timestamp}.${extension}`
-  const path = `documents/${folder}/${filename}`
-  
-  return uploadFile(file, path, onProgress)
+): Promise<any> {
+  const form = new FormData()
+  form.append('file', file)
+  form.append('folder', folder)
+  form.append('resource_type', 'raw')
+
+  const res = await fetch('/api/media/upload', {
+    method: 'POST',
+    body: form
+  })
+
+  if (!res.ok) throw new Error('Upload failed')
+  const data = await res.json()
+  return data.result
 }
 
-// Delete file from Firebase Storage
-export async function deleteFile(url: string): Promise<void> {
-  try {
-    const fileRef = ref(storage, url)
-    await deleteObject(fileRef)
-  } catch (error) {
-    console.error('Error deleting file:', error)
-    throw error
-  }
+// Delete by public_id (Cloudinary)
+export async function deleteFile(public_id: string, resource_type: 'image' | 'video' | 'raw' = 'image') {
+  const res = await fetch('/api/media/delete', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ public_id, resource_type })
+  })
+
+  if (!res.ok) throw new Error('Delete failed')
+  return res.json()
 }
 
-// Get all files in a folder
+// List files is best done via Firestore records; provide a thin shim that returns empty array
 export async function listFiles(folderPath: string): Promise<string[]> {
-  const folderRef = ref(storage, folderPath)
-  const result = await listAll(folderRef)
-  
-  const urls = await Promise.all(
-    result.items.map(itemRef => getDownloadURL(itemRef))
-  )
-  
-  return urls
+  // Optionally implement a server endpoint that lists by prefix using Cloudinary Admin API
+  return []
 }
 
 // Validate file type and size

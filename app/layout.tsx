@@ -39,14 +39,14 @@ export const metadata: Metadata = {
     address: false,
     telephone: false,
   },
-  metadataBase: new URL("https://engineering-excellence.com"),
+  metadataBase: new URL("https://drofandy.com"),
   alternates: {
     canonical: "/",
   },
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://engineering-excellence.com",
+    url: "https://drofandy.com",
     title: "Engineering Excellence Through Innovation",
     description: "Comprehensive NDT, Environmental Engineering, and Academic Consulting Solutions",
     siteName: "Engineering Excellence",
