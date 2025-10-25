@@ -486,7 +486,7 @@ export default function Home() {
         <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
           <div>
             <h2 className="text-3xl font-bold tracking-tight md:text-4xl text-[var(--text)]">
-              Why Choose Engineering Excellence?
+              Why Choose Drofandy?
             </h2>
             <p className="mt-6 text-lg text-[var(--muted)]">
               We combine technical expertise with innovative solutions to deliver 
@@ -542,43 +542,6 @@ export default function Home() {
               </motion.div>
             ))}
           </div>
-        </div>
-      </SectionWrapper>
-
-      {/* Process Section */}
-      <SectionWrapper background="accent">
-        <div className="mx-auto max-w-3xl text-center">
-          <h2 className="text-3xl font-bold tracking-tight md:text-4xl text-[var(--text)]">
-            How We Deliver Excellence
-          </h2>
-          <p className="mt-6 text-lg text-[var(--muted)]">
-            Our proven 4-step process ensures consistent, high-quality results
-          </p>
-        </div>
-        
-        <div className="mt-16 grid gap-8 md:grid-cols-2 lg:grid-cols-4">
-          {processSteps.map((step, index) => (
-            <motion.div
-              key={step.step}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: index * 0.2 }}
-              viewport={{ once: true }}
-              className="relative"
-            >
-              <div className="text-center">
-                <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-[var(--primary)] text-white text-xl font-bold">
-                  {step.step}
-                </div>
-                <h3 className="mt-4 text-xl font-semibold text-[var(--text)]">{step.title}</h3>
-                <p className="mt-2 text-[var(--muted)]">{step.description}</p>
-              </div>
-              
-              {index < processSteps.length - 1 && (
-                <div className="absolute left-1/2 top-16 hidden h-8 w-px bg-border lg:block" />
-              )}
-            </motion.div>
-          ))}
         </div>
       </SectionWrapper>
 
@@ -677,61 +640,7 @@ export default function Home() {
       </SectionWrapper>
 
       {/* Blog Section */}
-      <SectionWrapper>
-        <div className="mx-auto max-w-3xl text-center">
-          <p className="text-sm font-medium text-[var(--muted)] uppercase tracking-wide mb-4">
-            News
-          </p>
-          <h2 className="text-3xl font-bold tracking-tight md:text-4xl text-[var(--text)]">
-            Stay updated with engineering excellence tips
-          </h2>
-        </div>
-        
-        <div className="mt-16 grid gap-8 md:grid-cols-4">
-          {blogPosts.map((post, index) => (
-            <motion.div
-              key={post.title}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-              viewport={{ once: true }}
-            >
-              <Link href={post.href} className="group block">
-                <Card className="h-full overflow-hidden bg-white border border-gray-100 rounded-2xl shadow-none hover:shadow-lg transition-all duration-300 group-hover:-translate-y-1">
-                  {/* Blog Image */}
-                  <div className="relative h-48 overflow-hidden">
-                    <img
-                      src={post.image}
-                      alt={post.title}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
-                  </div>
-                  
-                  <CardContent className="p-6">
-                    {/* Blog Title */}
-                    <CardTitle className="text-xl font-bold text-[var(--text)] mb-4 group-hover:text-[var(--primary)] transition-colors leading-tight">
-                      {post.title}
-                    </CardTitle>
-                    
-                    {/* Date and Read Time */}
-                    <div className="flex items-center space-x-4 text-sm text-[var(--muted)]">
-                      <div className="flex items-center space-x-1">
-                        <Calendar className="h-4 w-4" />
-                        <span>{post.date}</span>
-                      </div>
-                      <div className="flex items-center space-x-1">
-                        <Clock className="h-4 w-4" />
-                        <span>{post.readTime}</span>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              </Link>
-            </motion.div>
-          ))}
-        </div>
-      </SectionWrapper>
+
 
       {/* CTA Section */}
       <SectionWrapper background="gradient" className="text-white">
@@ -750,7 +659,7 @@ export default function Home() {
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
             </Button>
-            <Button asChild variant="outline" size="lg" className="border-white text-white hover:bg-white hover:text-[var(--primary)]">
+            <Button asChild variant="default" size="lg" className="border-primary text-white hover:bg-white hover:text-primary">
               <Link href="/about">Learn More About Us</Link>
             </Button>
           </div>

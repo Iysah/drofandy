@@ -21,6 +21,10 @@ import { db } from './firebase'
 export interface BlogPost {
   id?: string
   title: string
+  href: string
+  image: string
+  date: string
+  readTime: string
   slug: string
   excerpt: string
   content: string

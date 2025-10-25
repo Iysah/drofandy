@@ -50,13 +50,13 @@ export function Navigation() {
       {/* contact information */}
       <div className="w-full bg-primary text-primary-foreground">
         <div className="container mx-auto flex h-10 items-center justify-between px-4 text-sm">
-          <div className="flex items-center space-x-4">
+          <div className="flex items-center space-x-4 text-white">
             <a href="tel:+1234567890" className="hover:underline">Phone: +1 (234) 567-890</a>
             <span className="hidden sm:inline">•</span>
             <a href="mailto:info@example.com" className="hover:underline">info@example.com</a>
           </div>
 
-          <div className="hidden sm:flex items-center space-x-2">
+          <div className="hidden sm:flex items-center space-x-2 text-white">
             <Clock className="h-4 w-4" />
             <span>Mon — Fri: 9:00 — 17:00</span>
           </div>

@@ -152,7 +152,7 @@ function EmailPasswordSignIn() {
   return (
     <form onSubmit={submit} className="space-y-4">
       <div>
-        <label className="block text-sm font-medium text-slate-700 mb-1">Email address</label>
+        <label className="block text-sm font-medium text-slate-700 mb-1 text-left">Email address</label>
         <input
           type="email"
           value={email}
@@ -162,8 +162,9 @@ function EmailPasswordSignIn() {
           className="w-full px-3 py-2 border border-slate-300 rounded-md placeholder-slate-400 focus:outline-none"
         />
       </div>
+
       <div>
-        <label className="block text-sm font-medium text-slate-700 mb-1">Password</label>
+        <label className="block text-sm font-medium text-slate-700 mb-1 text-left">Password</label>
         <input
           type="password"
           value={password}
@@ -174,7 +175,7 @@ function EmailPasswordSignIn() {
         />
       </div>
       {error && <p className="text-sm text-red-600">{error}</p>}
-      <Button type="submit" className="w-full" disabled={loading}>
+      <Button type="submit" className="w-full text-white" disabled={loading}>
         {loading ? 'Signing in…' : 'Sign in'}
       </Button>
     </form>
@@ -295,7 +296,7 @@ function EmailPasswordSignIn() {
               <h3 className="text-lg font-semibold text-slate-900 mb-4">Quick Actions</h3>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <Link href="/admin/posts/new">
-                  <Button className="w-full justify-start">
+                  <Button className="w-full justify-start text-white">
                     <PlusCircle className="w-4 h-4 mr-2" />
                     Create New Post
                   </Button>
