@@ -67,7 +67,7 @@ export function Navigation() {
         {/* Logo */}
         <Link href="/" className="flex items-center space-x-2" onClick={closeMenu}>
           <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-primary-foreground">
-            <span className="text-sm font-bold">DF</span>
+            <span className="text-sm font-bold text-white">DF</span>
           </div>
           <span className="hidden font-bold sm:inline-block text-text">
             Drofandy
@@ -128,7 +128,7 @@ export function Navigation() {
 
         {/* CTA Button */}
         <div className="hidden md:flex">
-          <Button asChild size="sm">
+          <Button asChild size="sm" className="text-white">
             <Link href="/contact">Request Qoute</Link>
           </Button>
         </div>

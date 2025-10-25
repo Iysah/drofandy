@@ -486,7 +486,7 @@ export default function Home() {
         <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
           <div>
             <h2 className="text-3xl font-bold tracking-tight md:text-4xl text-[var(--text)]">
-              Why Choose Drofandy?
+              Why Choose Drofandy Group?
             </h2>
             <p className="mt-6 text-lg text-[var(--muted)]">
               We combine technical expertise with innovative solutions to deliver 
