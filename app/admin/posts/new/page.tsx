@@ -108,15 +108,16 @@ export default function NewBlogPost() {
     setLoading(true);
     try {
       const postData = {
-        ...form,
-        published: publish,
-        author: user.displayName || user.email || 'Admin',
-        authorId: user.uid,
-        readingTime: calculateReadingTime(form.content),
-        publishedAt: new Date(),
-        createdAt: new Date()
-      };
-
+         ...form,
+         published: publish,
+         author: user.displayName || user.email || 'Admin',
+         authorId: user.uid,
+         // Add required fields from BlogPost interface
+         href: `/blog/${form.slug}`,
+         image: form.featuredImage || '',  // Use featured image or empty string
+         date: new Date().toISOString(),
+         readTime: `${calculateReadingTime(form.content)} min read`
+      };     
       await blogPosts.create(postData);
       router.push('/admin?tab=posts');
     } catch (error) {

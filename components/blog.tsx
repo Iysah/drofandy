@@ -1,11 +1,28 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { SectionWrapper } from './section-wrapper'
 import { BlogPost, blogPosts } from '@/lib/firestore'
 import { motion } from 'framer-motion'
 import { Calendar, Clock, Link } from 'lucide-react'
 import { Card, CardContent, CardTitle } from './ui/card'
 
-function blog() {
+function Blog() {
+  const [posts, setPosts] = useState<BlogPost[]>([])
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    async function loadPosts() {
+      try {
+        const result = await blogPosts.getPublished()
+        setPosts(result.posts)
+      } catch (error) {
+        console.error('Failed to load blog posts:', error)
+      } finally {
+        setLoading(false)
+      }
+    }
+    loadPosts()
+  }, [])
+
   return (
     <SectionWrapper>
         <div className="mx-auto max-w-3xl text-center">
@@ -18,7 +35,11 @@ function blog() {
         </div>
         
         <div className="mt-16 grid gap-8 md:grid-cols-4">
-          {blogPosts.map((post: BlogPost, index: number) => (
+          {loading ? (
+            <p className="text-center col-span-4">Loading posts...</p>
+          ) : posts.length === 0 ? (
+            <p className="text-center col-span-4">No posts available yet.</p>
+          ) : posts.map((post: BlogPost, index: number) => (
             <motion.div
               key={post.title}
               initial={{ opacity: 0, y: 30 }}
@@ -65,4 +86,4 @@ function blog() {
   )
 }
 
-export default blog
+export default Blog
