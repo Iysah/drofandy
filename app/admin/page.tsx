@@ -198,8 +198,8 @@ function EmailPasswordSignIn() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center space-x-4">
-              <h1 className="text-xl font-semibold text-slate-900">Admin Dashboard</h1>
-              <Badge variant="secondary">Dr. Ofandy Engineering</Badge>
+              {/* <h1 className="text-xl font-semibold text-slate-900">Admin Dashboard</h1> */}
+              <Badge variant="secondary">Drofandy Group</Badge>
             </div>
             <div className="flex items-center space-x-4">
               <span className="text-sm text-slate-600">Welcome, {user.displayName}</span>
