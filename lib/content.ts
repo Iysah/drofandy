@@ -13,6 +13,7 @@ export interface Service {
   id?: string
   title: string
   image?: string
+  mediaId?: string
   description: string
   rating: number
   createdAt: Timestamp
@@ -23,6 +24,7 @@ export interface ProjectItem {
   id?: string
   title: string
   image: string
+  mediaId?: string
   createdAt: Timestamp
   createdBy?: string
 }

@@ -4,9 +4,11 @@ import {
   getDocs,
   query,
   orderBy,
+  where,
   updateDoc,
   doc,
   deleteDoc,
+  limit,
   Timestamp
 } from 'firebase/firestore'
 import { db } from './firebase'
@@ -49,5 +51,24 @@ export const adminUsers = {
   async delete(id: string) {
     const ref = doc(db, 'users', id)
     await deleteDoc(ref)
+  },
+
+  async getByEmail(email: string) {
+    const q = query(usersCol(), where('email', '==', email), limit(1))
+    const snap = await getDocs(q)
+    if (snap.empty) return null
+    const d = snap.docs[0]
+    return { id: d.id, ...d.data() } as AdminUser
+  },
+
+  async isAdminByEmail(email?: string) {
+    if (!email) return false
+    try {
+      const user = await adminUsers.getByEmail(email)
+      return !!(user && user.role === 'admin')
+    } catch (err) {
+      console.error('isAdminByEmail error', err)
+      return false
+    }
   }
 }

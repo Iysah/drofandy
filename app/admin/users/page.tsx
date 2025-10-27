@@ -13,9 +13,18 @@ export default function AdminUsersPage() {
   const [email, setEmail] = useState('')
   const [role, setRole] = useState<Role>('content-manager')
   const [loading, setLoading] = useState(false)
+  const [isAdmin, setIsAdmin] = useState<boolean | null>(null)
 
   useEffect(() => {
-    if (user) fetchUsers()
+    if (!user) return
+    let mounted = true
+    ;(async () => {
+      const ok = await adminUsers.isAdminByEmail(user.email || undefined)
+      if (!mounted) return
+      setIsAdmin(ok)
+      if (ok) fetchUsers()
+    })()
+    return () => { mounted = false }
   }, [user])
 
   const fetchUsers = async () => {
@@ -69,6 +78,17 @@ export default function AdminUsersPage() {
         <Card className="p-8">
           <h2 className="text-xl font-semibold">Sign in to manage users</h2>
           <Link href="/admin">Go to admin</Link>
+        </Card>
+      </div>
+    )
+  }
+
+  if (isAdmin === false) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <Card className="p-8">
+          <h2 className="text-xl font-semibold">Not authorized</h2>
+          <p className="text-sm text-slate-600">You do not have permission to manage users.</p>
         </Card>
       </div>
     )

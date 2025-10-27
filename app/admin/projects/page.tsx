@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react'
 import { useAuth } from '@/lib/auth-context'
 import { content } from '@/lib/content'
+import { adminUsers } from '@/lib/users'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { uploadImage } from '@/lib/storage'
@@ -14,7 +15,19 @@ export default function AdminProjectsPage() {
   const [loading, setLoading] = useState(false)
   const [projects, setProjects] = useState<any[]>([])
 
-  useEffect(() => { if (user) fetchProjects() }, [user])
+  const [isAdmin, setIsAdmin] = useState<boolean | null>(null)
+
+  useEffect(() => {
+    if (!user) return
+    let mounted = true
+    ;(async () => {
+      const ok = await adminUsers.isAdminByEmail(user.email || undefined)
+      if (!mounted) return
+      setIsAdmin(ok)
+      if (ok) fetchProjects()
+    })()
+    return () => { mounted = false }
+  }, [user])
 
   const fetchProjects = async () => {
     setLoading(true)
@@ -29,8 +42,10 @@ export default function AdminProjectsPage() {
     try {
       setLoading(true)
       const res: any = await uploadImage(file, 'general')
-      const url = res?.secure_url || res?.url
+      const url = res?.result?.secure_url || res?.result?.url
+      const mediaId = res?.mediaId
       setImage(url)
+      ;(window as any).__uploaded_media_id = mediaId
     } catch (err) { console.error(err) }
     setLoading(false)
   }
@@ -40,7 +55,8 @@ export default function AdminProjectsPage() {
     if (!user) return
     try {
       setLoading(true)
-      await content.createProject({ title, image: image || '', createdBy: user.uid } as any)
+  const mediaId = (window as any).__uploaded_media_id || null
+  await content.createProject({ title, image: image || '', mediaId, createdBy: user.uid } as any)
       setTitle('')
       setImage(undefined)
       await fetchProjects()
@@ -55,6 +71,7 @@ export default function AdminProjectsPage() {
   }
 
   if (!user) return <div className="p-8">Please sign in to manage projects.</div>
+  if (isAdmin === false) return <div className="p-8">You are not authorized to manage projects.</div>
 
   return (
     <div className="max-w-4xl mx-auto py-10">

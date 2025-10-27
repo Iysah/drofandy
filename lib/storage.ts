@@ -18,7 +18,8 @@ export async function uploadImage(
 
   if (!res.ok) throw new Error('Upload failed')
   const data = await res.json()
-  return data.result
+  // return full response so callers can get mediaId and raw result
+  return data
 }
 
 export async function uploadDocument(
@@ -38,7 +39,7 @@ export async function uploadDocument(
 
   if (!res.ok) throw new Error('Upload failed')
   const data = await res.json()
-  return data.result
+  return data
 }
 
 // Delete by public_id (Cloudinary)

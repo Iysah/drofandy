@@ -1,6 +1,7 @@
-'use client';
+ 'use client';
 
 import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation'
 import { useAuth } from '@/lib/auth-context';
 import { blogPosts, contactForms, BlogPost, ContactForm } from '@/lib/firestore';
 import { Button } from '@/components/ui/button';
@@ -32,6 +33,7 @@ export default function AdminDashboard() {
   try {
     const authContext = useAuth();
     user = authContext.user;
+    console.log(user);
     signOut = authContext.signOut;
     authLoading = authContext.loading;
   } catch (error) {
@@ -42,7 +44,8 @@ export default function AdminDashboard() {
   const [posts, setPosts] = useState<BlogPost[]>([]);
   const [contacts, setContacts] = useState<ContactForm[]>([]);
   const [loading, setLoading] = useState(true);
-  const [activeTab, setActiveTab] = useState<'overview' | 'posts' | 'contacts' | 'settings'>('overview');
+  const [activeTab, setActiveTab] = useState<'overview' | 'posts' | 'contacts' | 'settings' | 'users' | 'services' | 'projects' | 'testimonials'>('overview');
+  const router = useRouter()
 
   useEffect(() => {
     if (user) {
@@ -224,13 +227,24 @@ function EmailPasswordSignIn() {
             { id: 'overview', label: 'Overview', icon: BarChart3 },
             { id: 'posts', label: 'Blog Posts', icon: FileText },
             { id: 'contacts', label: 'Contact Forms', icon: MessageSquare },
+            { id: 'users', label: 'Users', icon: Users },
+            { id: 'services', label: 'Services', icon: FileText },
+            { id: 'projects', label: 'Projects', icon: PlusCircle },
+            { id: 'testimonials', label: 'Testimonials', icon: MessageSquare },
             { id: 'settings', label: 'Settings', icon: Settings }
           ].map((tab) => {
             const Icon = tab.icon;
             return (
               <button
                 key={tab.id}
-                onClick={() => setActiveTab(tab.id as any)}
+                onClick={() => {
+                  // route to dedicated pages for content sections
+                  if (['users','services','projects','testimonials'].includes(tab.id)) {
+                    router.push(`/admin/${tab.id}`)
+                    return
+                  }
+                  setActiveTab(tab.id as any)
+                }}
                 className={`flex items-center space-x-2 px-4 py-2 rounded-md text-sm font-medium transition-colors ${
                   activeTab === tab.id
                     ? 'bg-white text-blue-600 shadow-sm'

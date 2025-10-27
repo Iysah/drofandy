@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react'
 import { useAuth } from '@/lib/auth-context'
 import { content } from '@/lib/content'
+import { adminUsers } from '@/lib/users'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 
@@ -16,7 +17,19 @@ export default function AdminTestimonialsPage() {
   const [loading, setLoading] = useState(false)
   const [testimonials, setTestimonials] = useState<any[]>([])
 
-  useEffect(() => { if (user) fetchTestimonials() }, [user])
+  const [isAdmin, setIsAdmin] = useState<boolean | null>(null)
+
+  useEffect(() => {
+    if (!user) return
+    let mounted = true
+    ;(async () => {
+      const ok = await adminUsers.isAdminByEmail(user.email || undefined)
+      if (!mounted) return
+      setIsAdmin(ok)
+      if (ok) fetchTestimonials()
+    })()
+    return () => { mounted = false }
+  }, [user])
 
   const fetchTestimonials = async () => {
     setLoading(true)
@@ -50,6 +63,7 @@ export default function AdminTestimonialsPage() {
   }
 
   if (!user) return <div className="p-8">Please sign in to manage testimonials.</div>
+  if (isAdmin === false) return <div className="p-8">You are not authorized to manage testimonials.</div>
 
   return (
     <div className="max-w-4xl mx-auto py-10">

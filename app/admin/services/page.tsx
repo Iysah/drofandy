@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react'
 import { useAuth } from '@/lib/auth-context'
 import { content } from '@/lib/content'
+import { adminUsers } from '@/lib/users'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { uploadImage } from '@/lib/storage'
@@ -16,7 +17,19 @@ export default function AdminServicesPage() {
   const [loading, setLoading] = useState(false)
   const [services, setServices] = useState<any[]>([])
 
-  useEffect(() => { if (user) fetchServices() }, [user])
+  const [isAdmin, setIsAdmin] = useState<boolean | null>(null)
+
+  useEffect(() => {
+    if (!user) return
+    let mounted = true
+    ;(async () => {
+      const ok = await adminUsers.isAdminByEmail(user.email || undefined)
+      if (!mounted) return
+      setIsAdmin(ok)
+      if (ok) fetchServices()
+    })()
+    return () => { mounted = false }
+  }, [user])
 
   const fetchServices = async () => {
     setLoading(true)
@@ -31,8 +44,12 @@ export default function AdminServicesPage() {
     try {
       setLoading(true)
       const res: any = await uploadImage(file, 'general')
-      const url = res?.secure_url || res?.url
+      // server returns { result, mediaId }
+      const url = res?.result?.secure_url || res?.result?.url
+      const mediaId = res?.mediaId
       setImage(url)
+      // store mediaId temporarily on window for create time
+      ;(window as any).__uploaded_media_id = mediaId
     } catch (err) { console.error(err) }
     setLoading(false)
   }
@@ -42,7 +59,8 @@ export default function AdminServicesPage() {
     if (!user) return
     try {
       setLoading(true)
-      await content.createService({ title, image, description, rating, createdBy: user.uid } as any)
+  const mediaId = (window as any).__uploaded_media_id || null
+  await content.createService({ title, image, mediaId, description, rating, createdBy: user.uid } as any)
       setTitle('')
       setDescription('')
       setRating(5)
@@ -59,6 +77,7 @@ export default function AdminServicesPage() {
   }
 
   if (!user) return <div className="p-8">Please sign in to manage services.</div>
+  if (isAdmin === false) return <div className="p-8">You are not authorized to manage services.</div>
 
   return (
     <div className="max-w-4xl mx-auto py-10">
