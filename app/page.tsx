@@ -165,11 +165,6 @@ const blogPosts = [
 
 const projectGallery = [
   {
-    id: 1,
-    title: "Industrial Pipeline Inspection",
-    image: "https://images.pexels.com/photos/162568/pipes-industrial-tubes-industrial-162568.jpeg?auto=compress&cs=tinysrgb&w=600",
-  },
-  {
     id: 2,
     title: "Structural Steel Analysis",
     image: "https://images.pexels.com/photos/236705/pexels-photo-236705.jpeg?auto=compress&cs=tinysrgb&w=600",
@@ -188,81 +183,6 @@ const projectGallery = [
     id: 5,
     title: "Manufacturing Quality Control",
     image: "https://images.pexels.com/photos/1108101/pexels-photo-1108101.jpeg?auto=compress&cs=tinysrgb&w=600",
-  },
-  {
-    id: 6,
-    title: "Pressure Vessel Testing",
-    image: "https://images.pexels.com/photos/1108572/pexels-photo-1108572.jpeg?auto=compress&cs=tinysrgb&w=600",
-  },
-  {
-    id: 7,
-    title: "Welding Joint Inspection",
-    image: "https://images.pexels.com/photos/1108717/pexels-photo-1108717.jpeg?auto=compress&cs=tinysrgb&w=600",
-  },
-  {
-    id: 8,
-    title: "Concrete Structure Analysis",
-    image: "https://images.pexels.com/photos/1216589/pexels-photo-1216589.jpeg?auto=compress&cs=tinysrgb&w=600",
-  },
-  {
-    id: 9,
-    title: "Electrical System Audit",
-    image: "https://images.pexels.com/photos/257736/pexels-photo-257736.jpeg?auto=compress&cs=tinysrgb&w=600",
-  },
-  {
-    id: 10,
-    title: "Mechanical Component Testing",
-    image: "https://images.pexels.com/photos/1108099/pexels-photo-1108099.jpeg?auto=compress&cs=tinysrgb&w=600",
-  },
-  {
-    id: 11,
-    title: "Water Treatment Facility",
-    image: "https://images.pexels.com/photos/1108572/pexels-photo-1108572.jpeg?auto=compress&cs=tinysrgb&w=600",
-  },
-  {
-    id: 12,
-    title: "Solar Panel Installation",
-    image: "https://images.pexels.com/photos/433308/pexels-photo-433308.jpeg?auto=compress&cs=tinysrgb&w=600",
-  },
-  {
-    id: 13,
-    title: "HVAC System Design",
-    image: "https://images.pexels.com/photos/1108717/pexels-photo-1108717.jpeg?auto=compress&cs=tinysrgb&w=600",
-  },
-  {
-    id: 14,
-    title: "Chemical Plant Safety Audit",
-    image: "https://images.pexels.com/photos/1108101/pexels-photo-1108101.jpeg?auto=compress&cs=tinysrgb&w=600",
-  },
-  {
-    id: 15,
-    title: "Turbine Blade Inspection",
-    image: "https://images.pexels.com/photos/1108099/pexels-photo-1108099.jpeg?auto=compress&cs=tinysrgb&w=600",
-  },
-  {
-    id: 16,
-    title: "Geotechnical Site Investigation",
-    image: "https://images.pexels.com/photos/1216589/pexels-photo-1216589.jpeg?auto=compress&cs=tinysrgb&w=600",
-  },
-  {
-    id: 17,
-    title: "Automotive Parts Testing",
-    image: "https://images.pexels.com/photos/257736/pexels-photo-257736.jpeg?auto=compress&cs=tinysrgb&w=600",
-  },
-  {
-    id: 18,
-    title: "Aerospace Component Analysis",
-    image: "https://images.pexels.com/photos/236705/pexels-photo-236705.jpeg?auto=compress&cs=tinysrgb&w=600",
-  },
-  {
-    id: 19,
-    title: "Oil Rig Structural Assessment",
-    image: "https://images.pexels.com/photos/162568/pipes-industrial-tubes-industrial-162568.jpeg?auto=compress&cs=tinysrgb&w=600",
-  },
-  {
-    id: 20,
-    title: "Nuclear Facility Inspection",
-    image: "https://images.pexels.com/photos/2280549/pexels-photo-2280549.jpeg?auto=compress&cs=tinysrgb&w=600",
   },
 ]
 
@@ -285,7 +205,7 @@ export default function Home() {
               
               <h1 className="text-4xl font-bold tracking-tight text-[var(--text)] md:text-5xl lg:text-6xl mb-6">
                 Expert Consultancy Across{" "}
-                <span className="text-[var(--primary)]">Three Core Sectors</span>
+                <span className="text-[var(--primary)]">Four Core Sectors</span>
               </h1>
               
               <p className="text-lg text-[var(--muted)] mb-8 max-w-xl">
@@ -308,7 +228,7 @@ export default function Home() {
                   </div>
                   <div>
                     <div className="text-sm font-medium">Contact us</div>
-                    <div className="text-sm text-[var(--muted)]">(780) 880-7279</div>
+                    <div className="text-sm text-[var(--muted)]">(1) 780 880-7279</div>
                   </div>
                 </div>
               </div>
@@ -414,14 +334,14 @@ export default function Home() {
           </p>
         </div>
         
-        <div className="mt-16 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-16 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
           {services.map((service, index) => {
             // Professional service images from Pexels
             const serviceImages = [
               "https://images.pexels.com/photos/5726794/pexels-photo-5726794.jpeg?auto=compress&cs=tinysrgb&w=400", // NDT Testing - Industrial inspection
-              "https://images.pexels.com/photos/9324336/pexels-photo-9324336.jpeg?auto=compress&cs=tinysrgb&w=400", // Environmental Engineering - Green technology
+              "https://images.pexels.com/photos/8293680/pexels-photo-8293680.jpeg?auto=compress&cs=tinysrgb&w=400", // Environmental Engineering - Green technology
+              "https://images.pexels.com/photos/12416261/pexels-photo-12416261.jpeg?auto=compress&cs=tinysrgb&w=400", // Industrial Solutions - Manufacturing
               "https://images.pexels.com/photos/5212317/pexels-photo-5212317.jpeg?auto=compress&cs=tinysrgb&w=400", // Academic Consulting - Research lab
-              "https://images.pexels.com/photos/5835359/pexels-photo-5835359.jpeg?auto=compress&cs=tinysrgb&w=400", // Industrial Solutions - Manufacturing
               "https://images.pexels.com/photos/5726788/pexels-photo-5726788.jpeg?auto=compress&cs=tinysrgb&w=400", // Quality Assurance - Quality control
               "https://images.pexels.com/photos/5726793/pexels-photo-5726793.jpeg?auto=compress&cs=tinysrgb&w=400", // Certification Support - Professional certification
             ];
@@ -556,7 +476,7 @@ export default function Home() {
           </p>
         </div>
         
-        <div className="mt-16 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 md:gap-6">
+        <div className="mt-16 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6">
           {projectGallery.map((project, index) => (
             <motion.div
               key={project.id}

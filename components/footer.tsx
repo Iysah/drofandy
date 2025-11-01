@@ -3,16 +3,16 @@ import { Mail, Phone, MapPin, Linkedin, Twitter, Facebook } from "lucide-react"
 
 const footerLinks = {
   services: [
-    { title: "NDT Testing", href: "/services/ndt" },
-    { title: "Environmental Engineering", href: "/services/environmental" },
-    { title: "Academic Consulting", href: "/services/academic" },
-    { title: "Industrial Solutions", href: "/services/industrial" },
+    { title: "Non-Destructive Examination (NDE) Services", href: "/services/ndt" },
+    { title: "Comprehensive Inspection Services", href: "/services/environmental" },
+    { title: "Environmental Engineering Consultancy", href: "/services/academic" },
+    { title: "Educational Consulting Services", href: "/services/industrial" },
   ],
   company: [
     { title: "About Us", href: "/about" },
     { title: "Our Team", href: "/about#team" },
     { title: "Certifications", href: "/about#certifications" },
-    { title: "Careers", href: "/careers" },
+    // { title: "Careers", href: "/careers" },
   ],
   resources: [
     { title: "News", href: "/blog" },
@@ -48,14 +48,14 @@ export function Footer() {
               <span className="font-bold">DROFANDY Group Inc.</span>
             </Link>
             <p className="mt-4 text-sm text-muted-foreground">
-              Expert consultancy across three core sectors: non-destructive examination and inspection, 
-              environmental engineering, and educational support. Delivering reliable industrial solutions 
+              Expert consultancy across four core sectors: Non-Destructive Examination (NDE) Services, 
+              Environmental Engineering, and Educational Consulting. Delivering reliable industrial solutions 
               and strategic academic guidance.
             </p>
             <div className="mt-6 space-y-2">
               <div className="flex items-center space-x-2 text-sm text-muted-foreground">
                 <Phone className="h-4 w-4" />
-                <span>Alford: (780) 880-7279 | Sandra: (780) 880-3674</span>
+                <span>Alford: (1) 780-880-7279 | Sandra: (1) 780-880-3674</span>
               </div>
               <div className="flex items-center space-x-2 text-sm text-muted-foreground">
                 <Mail className="h-4 w-4" />
