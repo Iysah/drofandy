@@ -180,7 +180,7 @@ Project Details:
             </h1>
             <p className="text-xl text-muted mb-8 leading-relaxed">
               Ready to start your next project? Contact DROFANDY Group Inc. for expert 
-              consultancy in NDE inspection, environmental engineering, and educational support.
+              consultancy in Non-destructive examination, comprehensive inspection, environmental engineering, and educational consulting.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <Badge variant="secondary" className="text-lg px-4 py-2">
@@ -298,12 +298,10 @@ Project Details:
                           className="w-full px-3 py-2 border border-input bg-background rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
                         >
                           <option value="">Select a service</option>
-                          <option value="ndt">NDT Testing</option>
+                          <option value="ndt">NDT Examination</option>
                           <option value="environmental">Environmental Engineering</option>
-                          <option value="academic">Academic Consulting</option>
-                          <option value="industrial">Industrial Solutions</option>
-                          <option value="quality">Quality Assurance</option>
-                          <option value="certification">Certification Support</option>
+                          <option value="academic">Educational Consulting</option>
+                          <option value="industrial">Comprehensive Inspection</option>
                           <option value="other">Other</option>
                         </select>
                       </div>
@@ -535,7 +533,7 @@ Project Details:
             className="text-center mb-16"
           >
             <h2 className="text-3xl md:text-4xl font-bold text-text mb-4">
-              Why Choose Engineering Excellence?
+              Why Choose Drofandy Group Inc?
             </h2>
             <p className="text-xl text-text max-w-3xl mx-auto">
               Partner with us for reliable, innovative, and professional engineering solutions
@@ -571,7 +569,7 @@ Project Details:
       </SectionWrapper>
 
       {/* Emergency Contact */}
-      <SectionWrapper>
+      {/* <SectionWrapper>
         <div className="container mx-auto px-4">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -602,7 +600,7 @@ Project Details:
             </div>
           </motion.div>
         </div>
-      </SectionWrapper>
+      </SectionWrapper> */}
 
       <Footer />
     </div>

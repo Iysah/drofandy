@@ -12,6 +12,7 @@ const footerLinks = {
     { title: "About Us", href: "/about" },
     { title: "Our Team", href: "/about#team" },
     { title: "Certifications", href: "/about#certifications" },
+    { title: "Contact Us", href: "/contact" },
     // { title: "Careers", href: "/careers" },
   ],
   resources: [
@@ -22,9 +23,14 @@ const footerLinks = {
   ],
   support: [
     { title: "Contact Us", href: "/contact" },
-    { title: "Emergency Services", href: "/contact#emergency" },
+    // { title: "Emergency Services", href: "/contact#emergency" },
     { title: "Technical Support", href: "/support" },
     { title: "Documentation", href: "/docs" },
+  ],
+  extras: [
+    { title: "Privacy Policy", href: "/privacy" },
+    { title: "Terms of Service", href: "/terms" },
+    { title: "Cookie Policy", href: "/cookies" },
   ],
 }
 
@@ -38,7 +44,7 @@ export function Footer() {
   return (
     <footer className="border-t bg-neutral-50 dark:bg-neutral-900">
       <div className="container mx-auto px-4 py-12">
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-6">
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-5">
           {/* Company Info */}
           <div className="lg:col-span-2">
             <Link href="/" className="flex items-center space-x-2">
@@ -60,6 +66,8 @@ export function Footer() {
               <div className="flex items-center space-x-2 text-sm text-muted-foreground">
                 <Mail className="h-4 w-4" />
                 <span>akukaigwe@drofandy.com</span>
+                <span> | </span>  
+                <span>sukaigwe@drofandy.com</span>
               </div>
               <div className="flex items-center space-x-2 text-sm text-muted-foreground">
                 <MapPin className="h-4 w-4" />
@@ -102,11 +110,11 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* Resources */}
+          {/* Support */}
           <div>
-            <h3 className="font-semibold">Resources</h3>
+            <h3 className="font-semibold">Support</h3>
             <ul className="mt-4 space-y-2">
-              {footerLinks.resources.map((link) => (
+              {footerLinks.extras.map((link) => (
                 <li key={link.href}>
                   <Link
                     href={link.href}
@@ -119,22 +127,7 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* Support */}
-          <div>
-            <h3 className="font-semibold">Support</h3>
-            <ul className="mt-4 space-y-2">
-              {footerLinks.support.map((link) => (
-                <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className="text-sm text-muted-foreground transition-colors hover:text-foreground"
-                  >
-                    {link.title}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
+
         </div>
 
         {/* Bottom Section */}
@@ -143,17 +136,17 @@ export function Footer() {
             <p className="text-sm text-muted-foreground">
               © 2025 DROFANDY Group Inc. All rights reserved.
             </p>
-            <div className="flex space-x-4 text-sm">
-              <Link href="/privacy" className="text-muted-foreground hover:text-foreground">
-                Privacy Policy
-              </Link>
-              <Link href="/terms" className="text-muted-foreground hover:text-foreground">
-                Terms of Service
-              </Link>
-              <Link href="/cookies" className="text-muted-foreground hover:text-foreground">
-                Cookie Policy
-              </Link>
-            </div>
+          {/* <div className="flex space-x-4 text-sm">
+            <Link href="/privacy" className="text-muted-foreground hover:text-foreground">
+              Privacy Policy
+            </Link>
+            <Link href="/terms" className="text-muted-foreground hover:text-foreground">
+              Terms of Service
+            </Link>
+            <Link href="/cookies" className="text-muted-foreground hover:text-foreground">
+              Cookie Policy
+            </Link>
+          </div> */}
           </div>
 
           {/* Social Links */}

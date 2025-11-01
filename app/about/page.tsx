@@ -72,7 +72,7 @@ export default function AboutPage() {
     {
       name: 'Alford Ukaigwe',
       role: 'Principal Consultant',
-      contact: '(780) 880-7279',
+      contact: '(+1) 780-880-7279',
       email: 'akukaigwe@drofandy.com',
       specialization: 'NDE & Inspection Services',
       bio: 'Leading expert in non-destructive examination and comprehensive inspection services with extensive industry experience.'
@@ -80,7 +80,7 @@ export default function AboutPage() {
     {
       name: 'Sandra Ukaigwe',
       role: 'Principal Consultant',
-      contact: '(780) 880-3674',
+      contact: '(+1) 780-880-3674',
       email: 'sukaigwe@drofandy.com',
       specialization: 'Environmental & Educational Consulting',
       bio: 'Specialist in environmental engineering solutions and educational consulting with focus on student success strategies.'

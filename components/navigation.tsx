@@ -17,20 +17,20 @@ const navigationItems = [
     title: "Services",
     href: "/services",
     children: [
-      { title: "NDT Testing", href: "/services/ndt" },
-      { title: "Environmental Engineering", href: "/services/environmental" },
-      { title: "Academic Consulting", href: "/services/academic" },
-      { title: "Industrial Solutions", href: "/services/industrial" },
+      { title: "NDT Services", href: "/services/ndt" },
+      { title: "Comprehensive Inspection Services", href: "/services/environmental" },
+      { title: "Environmental Engineering Consultancy", href: "/services/academic" },
+      { title: "Educational Consulting Services", href: "/services/industrial" },
     ],
   },
   {
     title: "About",
     href: "/about",
   },
-  {
-    title: "News",
-    href: "/blog",
-  },
+  // {
+  //   title: "News",
+  //   href: "/blog",
+  // },
   {
     title: "Contact",
     href: "/contact",
@@ -51,9 +51,9 @@ export function Navigation() {
       <div className="w-full bg-primary text-primary-foreground">
         <div className="container mx-auto flex h-10 items-center justify-between px-4 text-sm">
           <div className="flex items-center space-x-4 text-white">
-            <a href="tel:+1234567890" className="hover:underline">Phone: +1 (234) 567-890</a>
+            <a href="tel:+17808807279" className="hover:underline">Phone: (1) 780-880-7279</a>
             <span className="hidden sm:inline">•</span>
-            <a href="mailto:info@example.com" className="hover:underline">info@example.com</a>
+            <a href="mailto:solutions@drofandy`.com" className="hover:underline">solutions@drofandy.com</a>
           </div>
 
           <div className="hidden sm:flex items-center space-x-2 text-white">
@@ -66,9 +66,11 @@ export function Navigation() {
       <nav className="container mx-auto flex h-16 items-center justify-between px-4">
         {/* Logo */}
         <Link href="/" className="flex items-center space-x-2" onClick={closeMenu}>
-          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-primary-foreground">
-            <span className="text-sm font-bold text-white">DF</span>
-          </div>
+          <img 
+            src="/drofandy-logo.jpeg" 
+            alt="Drofandy Logo" 
+            className="h-8 w-auto rounded"
+          />
           <span className="hidden font-bold sm:inline-block text-text">
             Drofandy
           </span>
