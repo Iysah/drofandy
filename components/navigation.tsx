@@ -72,7 +72,7 @@ export function Navigation() {
             className="h-8 w-auto rounded"
           />
           <span className="hidden font-bold sm:inline-block text-text">
-            Drofandy
+            DROFANDY Group Inc.
           </span>
         </Link>
 

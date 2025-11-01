@@ -48,9 +48,11 @@ export function Footer() {
           {/* Company Info */}
           <div className="lg:col-span-2">
             <Link href="/" className="flex items-center space-x-2">
-              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-primary-foreground">
-                <span className="text-sm font-bold text-white">DG</span>
-              </div>
+              <img 
+                src="/drofandy-logo.jpeg" 
+                alt="Drofandy Logo" 
+                className="h-8 w-auto"
+              />
               <span className="font-bold">DROFANDY Group Inc.</span>
             </Link>
             <p className="mt-4 text-sm text-muted-foreground">
