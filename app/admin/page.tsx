@@ -1,4 +1,4 @@
- 'use client';
+'use client';
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation'
@@ -201,8 +201,16 @@ function EmailPasswordSignIn() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center space-x-4">
-              {/* <h1 className="text-xl font-semibold text-slate-900">Admin Dashboard</h1> */}
-              <Badge variant="secondary">Drofandy Group</Badge>
+              <Link href="/" className="flex items-center space-x-2">
+                <img 
+                  src="/drofandy-logo.jpeg" 
+                  alt="Drofandy Logo" 
+                  className="h-8 w-auto rounded"
+                />
+                <span className="hidden font-bold sm:inline-block text-text">
+                  DROFANDY Admin
+                </span>
+              </Link>
             </div>
             <div className="flex items-center space-x-4">
               <span className="text-sm text-slate-600">Welcome, {user.displayName}</span>
