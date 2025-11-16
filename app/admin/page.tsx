@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation'
 import { useAuth } from '@/lib/auth-context';
+import { adminUsers } from '@/lib/users'
 import { blogPosts, contactForms, BlogPost, ContactForm } from '@/lib/firestore';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
@@ -23,6 +24,7 @@ import {
   Clock
 } from 'lucide-react';
 import Link from 'next/link';
+import AdminNavTabs from '@/components/admin/admin-nav-tabs'
 
 export default function AdminDashboard() {
   // Handle auth context safely during build/pre-rendering
@@ -46,12 +48,19 @@ export default function AdminDashboard() {
   const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState<'overview' | 'posts' | 'contacts' | 'settings' | 'users' | 'services' | 'projects' | 'testimonials'>('overview');
   const router = useRouter()
+  const [isAdmin, setIsAdmin] = useState<boolean | null>(null)
 
   useEffect(() => {
-    if (user) {
-      loadData();
-    }
-  }, [user]);
+    if (!user) return
+    let mounted = true
+    ;(async () => {
+      const ok = await adminUsers.isAdminByEmail(user.email || undefined)
+      if (!mounted) return
+      setIsAdmin(ok)
+      if (ok) loadData()
+    })()
+    return () => { mounted = false }
+  }, [user])
 
   const loadData = async () => {
     try {
@@ -128,6 +137,27 @@ export default function AdminDashboard() {
         </Card>
       </div>
     );
+  }
+
+  if (isAdmin === false) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 flex items-center justify-center">
+        <Card className="w-full max-w-md p-8">
+          <div className="text-center space-y-6">
+            <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto">
+              <Settings className="w-8 h-8 text-blue-600" />
+            </div>
+            <div>
+              <h1 className="text-2xl font-bold text-slate-900 mb-2">Not authorized</h1>
+              <p className="text-slate-600">You do not have permission to access the admin dashboard.</p>
+            </div>
+            <Link href="/">
+              <Button className="w-full justify-center" variant="outline">Go to home</Button>
+            </Link>
+          </div>
+        </Card>
+      </div>
+    )
   }
 
 
@@ -229,42 +259,7 @@ function EmailPasswordSignIn() {
       </header>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {/* Navigation Tabs */}
-        <div className="flex space-x-1 bg-slate-100 p-1 rounded-lg mb-8 w-fit">
-          {[
-            { id: 'overview', label: 'Overview', icon: BarChart3 },
-            { id: 'posts', label: 'Blog Posts', icon: FileText },
-            { id: 'contacts', label: 'Contact Forms', icon: MessageSquare },
-            { id: 'users', label: 'Users', icon: Users },
-            { id: 'services', label: 'Services', icon: FileText },
-            { id: 'projects', label: 'Projects', icon: PlusCircle },
-            { id: 'testimonials', label: 'Testimonials', icon: MessageSquare },
-            { id: 'settings', label: 'Settings', icon: Settings }
-          ].map((tab) => {
-            const Icon = tab.icon;
-            return (
-              <button
-                key={tab.id}
-                onClick={() => {
-                  // route to dedicated pages for content sections
-                  if (['users','services','projects','testimonials'].includes(tab.id)) {
-                    router.push(`/admin/${tab.id}`)
-                    return
-                  }
-                  setActiveTab(tab.id as any)
-                }}
-                className={`flex items-center space-x-2 px-4 py-2 rounded-md text-sm font-medium transition-colors ${
-                  activeTab === tab.id
-                    ? 'bg-white text-blue-600 shadow-sm'
-                    : 'text-slate-600 hover:text-slate-900'
-                }`}
-              >
-                <Icon className="w-4 h-4" />
-                <span>{tab.label}</span>
-              </button>
-            );
-          })}
-        </div>
+        <AdminNavTabs activeTab={activeTab} onChangeTab={(id) => setActiveTab(id as any)} />
 
         {/* Overview Tab */}
         {activeTab === 'overview' && (

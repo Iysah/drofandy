@@ -6,6 +6,7 @@ import { adminUsers, Role } from '@/lib/users'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import Link from 'next/link'
+import AdminNavTabs from '@/components/admin/admin-nav-tabs'
 
 export default function AdminUsersPage() {
   const { user } = useAuth()
@@ -96,6 +97,7 @@ export default function AdminUsersPage() {
 
   return (
     <div className="max-w-4xl mx-auto py-10">
+      <AdminNavTabs />
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-2xl font-bold">Manage Users & Roles</h1>
         <Link href="/admin">Back to admin</Link>

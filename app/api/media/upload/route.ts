@@ -1,7 +1,6 @@
 import { NextResponse } from 'next/server'
 import { v2 as cloudinary } from 'cloudinary'
-import { db } from '@/lib/firebase'
-import { collection, addDoc, serverTimestamp } from 'firebase/firestore'
+import admin from 'firebase-admin'
 
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
@@ -37,8 +36,7 @@ export async function POST(request: Request) {
 
     // Save metadata to Firestore
     try {
-      const mediaCollection = collection(db, 'media')
-      const mediaDoc = await addDoc(mediaCollection, {
+      const mediaDoc = await admin.firestore().collection('media').add({
         public_id: (uploadResult as any).public_id,
         secure_url: (uploadResult as any).secure_url || (uploadResult as any).url,
         resource_type,
@@ -47,7 +45,7 @@ export async function POST(request: Request) {
         format: (uploadResult as any).format,
         width: (uploadResult as any).width,
         height: (uploadResult as any).height,
-        createdAt: serverTimestamp(),
+        createdAt: admin.firestore.FieldValue.serverTimestamp(),
         raw_response: uploadResult
       })
 
@@ -62,3 +60,14 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: error.message || String(error) }, { status: 500 })
   }
 }
+try {
+  if (!admin.apps.length) {
+    admin.initializeApp({
+      credential: admin.credential.cert({
+        projectId: process.env.FIREBASE_ADMIN_PROJECT_ID,
+        clientEmail: process.env.FIREBASE_ADMIN_CLIENT_EMAIL,
+        privateKey: process.env.FIREBASE_ADMIN_PRIVATE_KEY?.replace(/\\n/g, '\n')
+      })
+    })
+  }
+} catch {}

@@ -7,6 +7,7 @@ import { adminUsers } from '@/lib/users'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { uploadImage } from '@/lib/storage'
+import AdminNavTabs from '@/components/admin/admin-nav-tabs'
 
 export default function AdminServicesPage() {
   const { user } = useAuth()
@@ -81,6 +82,7 @@ export default function AdminServicesPage() {
 
   return (
     <div className="max-w-4xl mx-auto py-10">
+      <AdminNavTabs />
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-2xl font-bold">Services</h1>
       </div>

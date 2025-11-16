@@ -1,8 +1,9 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/lib/auth-context';
+import { adminUsers } from '@/lib/users'
 import { blogPosts } from '@/lib/firestore';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
@@ -22,6 +23,7 @@ import {
 } from 'lucide-react';
 import Link from 'next/link';
 import { uploadImage, deleteFile } from '@/lib/storage'
+import AdminNavTabs from '@/components/admin/admin-nav-tabs'
 
 interface BlogPostForm {
   title: string;
@@ -48,6 +50,7 @@ const categories = [
 export default function NewBlogPost() {
   const { user } = useAuth();
   const router = useRouter();
+  const [isAdmin, setIsAdmin] = useState<boolean | null>(null)
   const [loading, setLoading] = useState(false);
   const [newTag, setNewTag] = useState('');
   const [featuredUploading, setFeaturedUploading] = useState(false)
@@ -60,6 +63,17 @@ export default function NewBlogPost() {
     tags: [],
     published: false
   });
+
+  useEffect(() => {
+    if (!user) return
+    let mounted = true
+    ;(async () => {
+      const ok = await adminUsers.isAdminByEmail(user.email || undefined)
+      if (!mounted) return
+      setIsAdmin(ok)
+    })()
+    return () => { mounted = false }
+  }, [user])
 
   const generateSlug = (title: string) => {
     return title
@@ -144,6 +158,22 @@ export default function NewBlogPost() {
     );
   }
 
+  if (isAdmin === false) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 flex items-center justify-center">
+        <Card className="w-full max-w-md p-8">
+          <div className="text-center">
+            <h1 className="text-2xl font-bold text-slate-900 mb-4">Not authorized</h1>
+            <p className="text-slate-600 mb-6">You do not have permission to create blog posts.</p>
+            <Link href="/admin">
+              <Button>Go to Admin</Button>
+            </Link>
+          </div>
+        </Card>
+      </div>
+    )
+  }
+
   return (
     <div className="min-h-screen bg-slate-50">
       {/* Header */}
@@ -181,6 +211,7 @@ export default function NewBlogPost() {
       </header>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <AdminNavTabs />
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Main Content */}
           <div className="lg:col-span-2 space-y-6">
