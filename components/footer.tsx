@@ -138,6 +138,7 @@ export function Footer() {
             <p className="text-sm text-muted-foreground">
               © 2025 DROFANDY Group Inc. All rights reserved.
             </p>
+            
           {/* <div className="flex space-x-4 text-sm">
             <Link href="/privacy" className="text-muted-foreground hover:text-foreground">
               Privacy Policy
@@ -150,6 +151,12 @@ export function Footer() {
             </Link>
           </div> */}
           </div>
+          <p className="text-sm text-muted-foreground">
+            Designed and developed by{" "}
+            <Link href="https://zorfts.agency" target="_blank" rel="noopener noreferrer" className="hover:text-foreground hover:underline">
+              Zorfts Technologies
+            </Link>
+          </p>
 
           {/* Social Links */}
           <div className="mt-4 flex space-x-4 md:mt-0">
