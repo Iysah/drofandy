@@ -104,14 +104,14 @@ export default function AdminDashboard() {
   if (authLoading) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 flex items-center justify-center">
-        <Card className="w-full max-w-md p-8">
+        <Card className="w-full max-w-md p-8 border-0 shadow-xl shadow-slate-200/50 rounded-2xl">
           <div className="text-center space-y-6">
-            <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto animate-pulse">
-              <Settings className="w-8 h-8 text-blue-600" />
+            <div className="w-16 h-16 bg-indigo-50 rounded-2xl flex items-center justify-center mx-auto animate-pulse">
+              <Settings className="w-8 h-8 text-indigo-600" />
             </div>
             <div>
               <h1 className="text-2xl font-bold text-slate-900 mb-2">Loading...</h1>
-              <p className="text-slate-600">Checking authentication status...</p>
+              <p className="text-slate-500">Checking authentication status...</p>
             </div>
           </div>
         </Card>
@@ -122,15 +122,15 @@ export default function AdminDashboard() {
   // Show login prompt if not authenticated
   if (!user) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 flex items-center justify-center">
-        <Card className="w-full max-w-md p-8">
+      <div className="min-h-screen bg-slate-50 flex items-center justify-center">
+        <Card className="w-full max-w-md p-8 border-0 shadow-xl shadow-slate-200/50 rounded-2xl">
           <div className="text-center space-y-6">
-            <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto">
-              <Settings className="w-8 h-8 text-blue-600" />
+            <div className="w-16 h-16 bg-indigo-50 rounded-2xl flex items-center justify-center mx-auto">
+              <Settings className="w-8 h-8 text-indigo-600" />
             </div>
             <div>
               <h1 className="text-2xl font-bold text-slate-900 mb-2">Admin Access Required</h1>
-              <p className="text-slate-600">Please sign in to access the admin dashboard.</p>
+              <p className="text-slate-500">Please sign in to access the admin dashboard.</p>
             </div>
             <EmailPasswordSignIn />
           </div>
@@ -141,18 +141,18 @@ export default function AdminDashboard() {
 
   if (isAdmin === false) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 flex items-center justify-center">
-        <Card className="w-full max-w-md p-8">
+      <div className="min-h-screen bg-slate-50 flex items-center justify-center">
+        <Card className="w-full max-w-md p-8 border-0 shadow-xl shadow-slate-200/50 rounded-2xl">
           <div className="text-center space-y-6">
-            <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto">
-              <Settings className="w-8 h-8 text-blue-600" />
+            <div className="w-16 h-16 bg-indigo-50 rounded-2xl flex items-center justify-center mx-auto">
+              <Settings className="w-8 h-8 text-indigo-600" />
             </div>
             <div>
               <h1 className="text-2xl font-bold text-slate-900 mb-2">Not authorized</h1>
-              <p className="text-slate-600">You do not have permission to access the admin dashboard.</p>
+              <p className="text-slate-500">You do not have permission to access the admin dashboard.</p>
             </div>
             <Link href="/">
-              <Button className="w-full justify-center" variant="outline">Go to home</Button>
+              <Button className="w-full justify-center rounded-xl h-11" variant="outline">Go to home</Button>
             </Link>
           </div>
         </Card>
@@ -208,7 +208,7 @@ function EmailPasswordSignIn() {
         />
       </div>
       {error && <p className="text-sm text-red-600">{error}</p>}
-      <Button type="submit" className="w-full text-white" disabled={loading}>
+      <Button type="submit" className="w-full text-white bg-indigo-600 hover:bg-indigo-700 h-11 rounded-xl shadow-lg shadow-indigo-200/50 transition-all duration-200" disabled={loading}>
         {loading ? 'Signing in…' : 'Sign in'}
       </Button>
     </form>
@@ -227,38 +227,41 @@ function EmailPasswordSignIn() {
   return (
     <div className="min-h-screen bg-slate-50">
       {/* Header */}
-      <header className="bg-white border-b border-slate-200">
+      <header className="bg-white/80 backdrop-blur-md border-b border-slate-200/60 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center space-x-4">
-              <Link href="/" className="flex items-center space-x-2">
+              <Link href="/" className="flex items-center space-x-3 group">
                 <img 
                   src="/drofandy-logo.jpeg" 
                   alt="Drofandy Logo" 
                   className="h-8 w-auto rounded"
                 />
-                <span className="hidden font-bold sm:inline-block text-text">
-                  DROFANDY Admin
+                <span className="hidden font-bold text-lg sm:inline-block text-slate-900 tracking-tight">
+                   <span className="text-indigo-600">Admin Dashboard</span>
                 </span>
               </Link>
             </div>
-            <div className="flex items-center space-x-4">
-              <span className="text-sm text-slate-600">Welcome, {user.displayName}</span>
+            <div className="flex items-center space-x-6">
+              <div className="hidden md:flex flex-col items-end">
+                <span className="text-sm font-semibold text-slate-900">{user.displayName}</span>
+                <span className="text-xs text-slate-500">Administrator</span>
+              </div>
               <Button
-                variant="outline"
+                variant="ghost"
                 size="sm"
                 onClick={signOut}
-                className="flex items-center space-x-2"
+                className="flex items-center space-x-2 text-slate-600 hover:text-red-600 hover:bg-red-50 transition-colors"
               >
                 <LogOut className="w-4 h-4" />
-                <span>Sign Out</span>
+                <span className="hidden sm:inline">Sign Out</span>
               </Button>
             </div>
           </div>
         </div>
       </header>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <AdminNavTabs activeTab={activeTab} onChangeTab={(id) => setActiveTab(id as any)} />
 
         {/* Overview Tab */}
@@ -270,113 +273,179 @@ function EmailPasswordSignIn() {
           >
             {/* Stats Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-              <Card className="p-6">
-                <div className="flex items-center justify-between">
+              <Card className="p-6 bg-white rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition-all duration-200 group">
+                <div className="flex items-start justify-between">
                   <div>
-                    <p className="text-sm font-medium text-slate-600">Total Posts</p>
-                    <p className="text-3xl font-bold text-slate-900">{stats.totalPosts}</p>
+                    <p className="text-sm font-medium text-slate-500 mb-1">Total Posts</p>
+                    <p className="text-3xl font-bold text-slate-900 tracking-tight">{stats.totalPosts}</p>
                   </div>
-                  <FileText className="w-8 h-8 text-blue-600" />
+                  <div className="p-3 bg-indigo-50 rounded-xl group-hover:bg-indigo-100 transition-colors">
+                    <FileText className="w-6 h-6 text-indigo-600" />
+                  </div>
                 </div>
               </Card>
-              <Card className="p-6">
-                <div className="flex items-center justify-between">
+
+              <Card className="p-6 bg-white rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition-all duration-200 group">
+                <div className="flex items-start justify-between">
                   <div>
-                    <p className="text-sm font-medium text-slate-600">Published</p>
-                    <p className="text-3xl font-bold text-green-600">{stats.publishedPosts}</p>
+                    <p className="text-sm font-medium text-slate-500 mb-1">Published</p>
+                    <p className="text-3xl font-bold text-emerald-600 tracking-tight">{stats.publishedPosts}</p>
                   </div>
-                  <Eye className="w-8 h-8 text-green-600" />
+                  <div className="p-3 bg-emerald-50 rounded-xl group-hover:bg-emerald-100 transition-colors">
+                    <Eye className="w-6 h-6 text-emerald-600" />
+                  </div>
                 </div>
               </Card>
-              <Card className="p-6">
-                <div className="flex items-center justify-between">
+
+              <Card className="p-6 bg-white rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition-all duration-200 group">
+                <div className="flex items-start justify-between">
                   <div>
-                    <p className="text-sm font-medium text-slate-600">Contact Forms</p>
-                    <p className="text-3xl font-bold text-slate-900">{stats.totalContacts}</p>
+                    <p className="text-sm font-medium text-slate-500 mb-1">Contact Forms</p>
+                    <p className="text-3xl font-bold text-slate-900 tracking-tight">{stats.totalContacts}</p>
                   </div>
-                  <MessageSquare className="w-8 h-8 text-purple-600" />
+                  <div className="p-3 bg-violet-50 rounded-xl group-hover:bg-violet-100 transition-colors">
+                    <MessageSquare className="w-6 h-6 text-violet-600" />
+                  </div>
                 </div>
               </Card>
-              <Card className="p-6">
-                <div className="flex items-center justify-between">
+
+              <Card className="p-6 bg-white rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition-all duration-200 group">
+                <div className="flex items-start justify-between">
                   <div>
-                    <p className="text-sm font-medium text-slate-600">New Inquiries</p>
-                    <p className="text-3xl font-bold text-orange-600">{stats.newContacts}</p>
+                    <p className="text-sm font-medium text-slate-500 mb-1">New Inquiries</p>
+                    <p className="text-3xl font-bold text-amber-600 tracking-tight">{stats.newContacts}</p>
                   </div>
-                  <Users className="w-8 h-8 text-orange-600" />
+                  <div className="p-3 bg-amber-50 rounded-xl group-hover:bg-amber-100 transition-colors">
+                    <Users className="w-6 h-6 text-amber-600" />
+                  </div>
                 </div>
               </Card>
             </div>
 
             {/* Quick Actions */}
-            <Card className="p-6">
-              <h3 className="text-lg font-semibold text-slate-900 mb-4">Quick Actions</h3>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="space-y-4">
+              <h3 className="text-lg font-semibold text-slate-900">Quick Actions</h3>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <Link href="/admin/posts/new">
-                  <Button className="w-full justify-start text-white">
-                    <PlusCircle className="w-4 h-4 mr-2" />
-                    Create New Post
+                  <Button className="w-full h-auto py-6 justify-start text-white bg-indigo-600 hover:bg-indigo-700 rounded-xl shadow-lg shadow-indigo-200/50 transition-all duration-200 group">
+                    <div className="bg-white/20 p-2 rounded-lg mr-4 group-hover:scale-110 transition-transform">
+                      <PlusCircle className="w-6 h-6" />
+                    </div>
+                    <div className="text-left">
+                      <div className="font-semibold text-lg">Create New Post</div>
+                      <div className="text-indigo-100 text-xs font-normal">Write a new blog entry</div>
+                    </div>
                   </Button>
                 </Link>
                 <Button
                   variant="outline"
-                  className="w-full justify-start"
+                  className="w-full h-auto py-6 justify-start bg-white border-slate-200 hover:bg-slate-50 hover:border-slate-300 rounded-xl transition-all duration-200 group"
                   onClick={() => setActiveTab('contacts')}
                 >
-                  <MessageSquare className="w-4 h-4 mr-2" />
-                  Review Contact Forms
+                  <div className="bg-slate-100 p-2 rounded-lg mr-4 group-hover:bg-slate-200 transition-colors">
+                    <MessageSquare className="w-6 h-6 text-slate-600" />
+                  </div>
+                  <div className="text-left">
+                    <div className="font-semibold text-lg text-slate-900">Review Contacts</div>
+                    <div className="text-slate-500 text-xs font-normal">Check new messages</div>
+                  </div>
                 </Button>
                 <Button
                   variant="outline"
-                  className="w-full justify-start"
+                  className="w-full h-auto py-6 justify-start bg-white border-slate-200 hover:bg-slate-50 hover:border-slate-300 rounded-xl transition-all duration-200 group"
                   onClick={() => setActiveTab('posts')}
                 >
-                  <FileText className="w-4 h-4 mr-2" />
-                  Manage Posts
+                  <div className="bg-slate-100 p-2 rounded-lg mr-4 group-hover:bg-slate-200 transition-colors">
+                    <FileText className="w-6 h-6 text-slate-600" />
+                  </div>
+                  <div className="text-left">
+                    <div className="font-semibold text-lg text-slate-900">Manage Posts</div>
+                    <div className="text-slate-500 text-xs font-normal">Edit or delete content</div>
+                  </div>
                 </Button>
               </div>
-            </Card>
+            </div>
 
             {/* Recent Activity */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-              <Card className="p-6">
-                <h3 className="text-lg font-semibold text-slate-900 mb-4">Recent Posts</h3>
-                <div className="space-y-4">
-                  {posts.slice(0, 5).map((post) => (
-                    <div key={post.id} className="flex items-center justify-between">
-                      <div>
-                        <p className="font-medium text-slate-900">{post.title}</p>
-                        <p className="text-sm text-slate-600">
-                          {post.createdAt.toDate().toLocaleDateString()}
-                        </p>
+              <Card className="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden flex flex-col h-full">
+                <div className="px-6 py-4 border-b border-slate-100 bg-slate-50/50 flex justify-between items-center">
+                  <h3 className="font-semibold text-slate-900">Recent Posts</h3>
+                  <Link href="#" onClick={() => setActiveTab('posts')} className="text-xs font-medium text-indigo-600 hover:text-indigo-700">View All</Link>
+                </div>
+                <div className="divide-y divide-slate-100 flex-1">
+                  {posts.length === 0 ? (
+                    <div className="p-8 text-center">
+                      <div className="w-12 h-12 bg-slate-50 rounded-full flex items-center justify-center mx-auto mb-3">
+                        <FileText className="w-6 h-6 text-slate-300" />
                       </div>
-                      <Badge variant={post.published ? "default" : "secondary"}>
-                        {post.published ? 'Published' : 'Draft'}
-                      </Badge>
+                      <p className="text-slate-500 font-medium">No posts yet</p>
+                      <p className="text-slate-400 text-sm mt-1">Create your first blog post to get started.</p>
                     </div>
-                  ))}
+                  ) : (
+                    posts.slice(0, 5).map((post) => (
+                      <div key={post.id} className="p-4 hover:bg-slate-50 transition-colors flex items-center justify-between group">
+                        <div className="flex items-center space-x-3">
+                          <div className="w-10 h-10 rounded-lg bg-slate-100 flex items-center justify-center text-slate-500 group-hover:bg-white group-hover:shadow-sm transition-all">
+                            <FileText className="w-5 h-5" />
+                          </div>
+                          <div>
+                            <p className="font-medium text-slate-900 line-clamp-1">{post.title}</p>
+                            <p className="text-xs text-slate-500 flex items-center mt-0.5">
+                              <Calendar className="w-3 h-3 mr-1" />
+                              {post.createdAt.toDate().toLocaleDateString()}
+                            </p>
+                          </div>
+                        </div>
+                        <Badge variant={post.published ? "default" : "secondary"} className={post.published ? "bg-emerald-100 text-emerald-700 hover:bg-emerald-200 border-0" : "bg-slate-100 text-slate-600 hover:bg-slate-200 border-0"}>
+                          {post.published ? 'Published' : 'Draft'}
+                        </Badge>
+                      </div>
+                    ))
+                  )}
                 </div>
               </Card>
 
-              <Card className="p-6">
-                <h3 className="text-lg font-semibold text-slate-900 mb-4">Recent Contacts</h3>
-                <div className="space-y-4">
-                  {contacts.slice(0, 5).map((contact) => (
-                    <div key={contact.id} className="flex items-center justify-between">
-                      <div>
-                        <p className="font-medium text-slate-900">{contact.name}</p>
-                        <p className="text-sm text-slate-600">{contact.service}</p>
+              <Card className="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden flex flex-col h-full">
+                <div className="px-6 py-4 border-b border-slate-100 bg-slate-50/50 flex justify-between items-center">
+                  <h3 className="font-semibold text-slate-900">Recent Contacts</h3>
+                  <Link href="#" onClick={() => setActiveTab('contacts')} className="text-xs font-medium text-indigo-600 hover:text-indigo-700">View All</Link>
+                </div>
+                <div className="divide-y divide-slate-100 flex-1">
+                  {contacts.length === 0 ? (
+                    <div className="p-8 text-center">
+                      <div className="w-12 h-12 bg-slate-50 rounded-full flex items-center justify-center mx-auto mb-3">
+                        <MessageSquare className="w-6 h-6 text-slate-300" />
                       </div>
-                      <Badge 
-                        variant={
-                          contact.status === 'new' ? 'destructive' :
-                          contact.status === 'contacted' ? 'default' : 'secondary'
-                        }
-                      >
-                        {contact.status}
-                      </Badge>
+                      <p className="text-slate-500 font-medium">No inquiries yet</p>
+                      <p className="text-slate-400 text-sm mt-1">New contact forms will appear here.</p>
                     </div>
-                  ))}
+                  ) : (
+                    contacts.slice(0, 5).map((contact) => (
+                      <div key={contact.id} className="p-4 hover:bg-slate-50 transition-colors flex items-center justify-between group">
+                        <div className="flex items-center space-x-3">
+                          <div className="w-10 h-10 rounded-lg bg-slate-100 flex items-center justify-center text-slate-500 group-hover:bg-white group-hover:shadow-sm transition-all">
+                            <Users className="w-5 h-5" />
+                          </div>
+                          <div>
+                            <p className="font-medium text-slate-900">{contact.name}</p>
+                            <p className="text-xs text-slate-500 flex items-center mt-0.5">
+                              <span className="truncate max-w-[150px]">{contact.service}</span>
+                            </p>
+                          </div>
+                        </div>
+                        <Badge 
+                          className={
+                            contact.status === 'new' ? 'bg-amber-100 text-amber-700 hover:bg-amber-200 border-0' :
+                            contact.status === 'contacted' ? 'bg-blue-100 text-blue-700 hover:bg-blue-200 border-0' : 
+                            'bg-slate-100 text-slate-600 hover:bg-slate-200 border-0'
+                          }
+                        >
+                          {contact.status}
+                        </Badge>
+                      </div>
+                    ))
+                  )}
                 </div>
               </Card>
             </div>
@@ -393,14 +462,14 @@ function EmailPasswordSignIn() {
             <div className="flex justify-between items-center">
               <h2 className="text-2xl font-bold text-slate-900">Blog Posts</h2>
               <Link href="/admin/posts/new">
-                <Button>
+                <Button className="bg-indigo-600 hover:bg-indigo-700 text-white shadow-md shadow-indigo-200/50 rounded-xl">
                   <PlusCircle className="w-4 h-4 mr-2" />
                   New Post
                 </Button>
               </Link>
             </div>
 
-            <Card>
+            <Card className="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden">
               <div className="overflow-x-auto">
                 <table className="w-full">
                   <thead className="bg-slate-50">
@@ -482,7 +551,7 @@ function EmailPasswordSignIn() {
           >
             <h2 className="text-2xl font-bold text-slate-900">Contact Forms</h2>
 
-            <Card>
+            <Card className="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden">
               <div className="overflow-x-auto">
                 <table className="w-full">
                   <thead className="bg-slate-50">
@@ -563,7 +632,7 @@ function EmailPasswordSignIn() {
             <h2 className="text-2xl font-bold text-slate-900">Settings</h2>
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-              <Card className="p-6">
+              <Card className="p-6 bg-white rounded-2xl shadow-sm border border-slate-100">
                 <h3 className="text-lg font-semibold text-slate-900 mb-4">Account Information</h3>
                 <div className="space-y-4">
                   <div>
@@ -581,7 +650,7 @@ function EmailPasswordSignIn() {
                 </div>
               </Card>
 
-              <Card className="p-6">
+              <Card className="p-6 bg-white rounded-2xl shadow-sm border border-slate-100">
                 <h3 className="text-lg font-semibold text-slate-900 mb-4">System Information</h3>
                 <div className="space-y-4">
                   <div>

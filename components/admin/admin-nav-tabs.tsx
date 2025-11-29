@@ -43,7 +43,7 @@ export default function AdminNavTabs({ activeTab, onChangeTab }: { activeTab?: s
   }
 
   return (
-    <div className="flex space-x-1 bg-slate-100 p-1 rounded-lg mb-8 w-fit">
+    <div className="flex flex-wrap gap-1 bg-slate-100/80 p-1.5 rounded-xl mb-8 w-fit backdrop-blur-sm border border-slate-200/50">
       {items.map((tab) => {
         const Icon = tab.icon
         const active = isActive(tab.id)
@@ -51,8 +51,10 @@ export default function AdminNavTabs({ activeTab, onChangeTab }: { activeTab?: s
           <button
             key={tab.id}
             onClick={() => handleClick(tab.id)}
-            className={`flex items-center space-x-2 px-4 py-2 rounded-md text-sm font-medium transition-colors ${
-              active ? 'bg-white text-blue-600 shadow-sm' : 'text-slate-600 hover:text-slate-900'
+            className={`flex items-center space-x-2 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
+              active 
+                ? 'bg-white text-indigo-600 shadow-sm ring-1 ring-black/5' 
+                : 'text-slate-600 hover:text-slate-900 hover:bg-slate-200/50'
             }`}
           >
             <Icon className="w-4 h-4" />

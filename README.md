@@ -34,24 +34,3 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-# drofandy
-
-## Cloudinary setup
-
-This project uses Cloudinary to host images and videos. Firebase is retained for Firestore (database) and Auth (admin authentication). To enable Cloudinary:
-
-1. Create a Cloudinary account at https://cloudinary.com/
-2. In your Cloudinary dashboard find your Cloud name, API Key and API Secret.
-3. Add the following environment variables to your `.env.local` or deployment platform:
-
-```
-CLOUDINARY_CLOUD_NAME=your-cloud-name
-CLOUDINARY_API_KEY=your-api-key
-CLOUDINARY_API_SECRET=your-api-secret
-```
-
-Usage notes:
-- Client-side uploads call `/api/media/upload` which forwards to Cloudinary.
-- Deletions call `/api/media/delete` and require the Cloudinary `public_id` of the resource.
-- For listing or more advanced asset management, consider using Cloudinary Admin API on the server-side.
-
