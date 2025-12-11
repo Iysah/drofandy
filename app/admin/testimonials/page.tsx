@@ -10,6 +10,7 @@ import AdminNavTabs from '@/components/admin/admin-nav-tabs'
 import { MessageSquare, Star, Trash2, User, Building, Briefcase, Quote, AlertCircle } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
 import Link from 'next/link'
+import { toast } from 'sonner'
 
 export default function AdminTestimonialsPage() {
   const { user } = useAuth()
@@ -49,21 +50,54 @@ export default function AdminTestimonialsPage() {
     if (!user) return
     try {
       setLoading(true)
-      await content.createTestimonial({ details, clientName, clientTitle, clientCompany, rating, createdBy: user.uid } as any)
+      const token = await user.getIdToken()
+      
+      const res = await fetch('/api/testimonials', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
+        body: JSON.stringify({ details, clientName, clientTitle, clientCompany, rating, createdBy: user.uid })
+      })
+
+      if (!res.ok) {
+        const data = await res.json()
+        throw new Error(data.error || 'Failed to create testimonial')
+      }
+
+      toast.success(`Success! Testimonial from '${clientName}' has been successfully created.`)
       setDetails('')
       setClientName('')
       setClientTitle('')
       setClientCompany('')
       setRating(5)
       await fetchTestimonials()
-    } catch (err) { console.error(err) }
+    } catch (err: any) { 
+        console.error(err) 
+        toast.error(`Error: Failed to create testimonial. Reason: ${err.message}`)
+    }
     setLoading(false)
   }
 
-  const handleDelete = async (id: string) => {
+  const handleDelete = async (id: string, clientName: string) => {
     if (!confirm('Delete testimonial?')) return
-    await content.deleteTestimonial(id)
-    setTestimonials(testimonials.filter(t => t.id !== id))
+    try {
+        if (!user) return
+        const token = await user.getIdToken()
+        const res = await fetch(`/api/testimonials?id=${id}`, {
+            method: 'DELETE',
+            headers: { Authorization: `Bearer ${token}` }
+        })
+
+        if (!res.ok) {
+            const data = await res.json()
+            throw new Error(data.error || 'Failed to delete testimonial')
+        }
+
+        toast.success(`Success! Testimonial from '${clientName}' has been successfully deleted.`)
+        setTestimonials(testimonials.filter(t => t.id !== id))
+    } catch (err: any) {
+        console.error(err)
+        toast.error(`Error: Failed to delete testimonial. Reason: ${err.message}`)
+    }
   }
 
   if (!user) {
@@ -266,7 +300,7 @@ export default function AdminTestimonialsPage() {
                                 <Button 
                                   variant="ghost" 
                                   size="sm"
-                                  onClick={() => handleDelete(t.id)}
+                                  onClick={() => handleDelete(t.id, t.clientName)}
                                   className="text-slate-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors opacity-0 group-hover:opacity-100"
                                 >
                                   <Trash2 className="w-4 h-4" />

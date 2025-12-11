@@ -1,15 +1,11 @@
-'use client';
+import { Toaster as Sonner } from "sonner"
+import { AuthProvider } from "@/lib/auth-context"
 
-import { AuthProvider } from '@/lib/auth-context';
-
-interface ProvidersProps {
-  children: React.ReactNode;
-}
-
-export function Providers({ children }: ProvidersProps) {
+export function Providers({ children }: { children: React.ReactNode }) {
   return (
     <AuthProvider>
       {children}
+      <Sonner />
     </AuthProvider>
-  );
+  )
 }

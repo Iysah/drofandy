@@ -11,6 +11,7 @@ import AdminNavTabs from '@/components/admin/admin-nav-tabs'
 import { FolderPlus, Image as ImageIcon, Trash2, UploadCloud, AlertCircle } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
 import Link from 'next/link'
+import { toast } from 'sonner'
 
 export default function AdminProjectsPage() {
   const { user } = useAuth()
@@ -59,19 +60,58 @@ export default function AdminProjectsPage() {
     if (!user) return
     try {
       setLoading(true)
-  const mediaId = (window as any).__uploaded_media_id || null
-  await content.createProject({ title, image: image || '', mediaId, createdBy: user.uid } as any)
+      const mediaId = (window as any).__uploaded_media_id || null
+      const token = await user.getIdToken()
+      
+      const res = await fetch('/api/projects', {
+        method: 'POST',
+        headers: { 
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify({ title, image: image || '', mediaId })
+      })
+
+      if (!res.ok) {
+        const data = await res.json()
+        throw new Error(data.error || 'Failed to create project')
+      }
+
+      toast.success(`Success! Project '${title}' has been successfully created.`)
       setTitle('')
       setImage(undefined)
       await fetchProjects()
-    } catch (err) { console.error(err) }
+    } catch (err: any) { 
+      console.error(err)
+      toast.error(`Error: Failed to create Project. Reason: ${err.message}`)
+    }
     setLoading(false)
   }
 
-  const handleDelete = async (id: string) => {
+  const handleDelete = async (id: string, projectTitle: string) => {
     if (!confirm('Delete project?')) return
-    await content.deleteProject(id)
-    setProjects(projects.filter(p => p.id !== id))
+    try {
+      if (!user) return
+      const token = await user.getIdToken()
+      
+      const res = await fetch(`/api/projects?id=${id}`, {
+        method: 'DELETE',
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      })
+
+      if (!res.ok) {
+        const data = await res.json()
+        throw new Error(data.error || 'Failed to delete project')
+      }
+
+      toast.success(`Success! Project '${projectTitle}' has been successfully deleted.`)
+      setProjects(projects.filter(p => p.id !== id))
+    } catch (err: any) {
+      console.error(err)
+      toast.error(`Error: Failed to delete Project. Reason: ${err.message}`)
+    }
   }
 
   if (!user) {
@@ -236,7 +276,7 @@ export default function AdminProjectsPage() {
                                 size="sm"
                                 onClick={(e) => {
                                   e.stopPropagation();
-                                  handleDelete(p.id);
+                                  handleDelete(p.id, p.title);
                                 }}
                                 className="self-end mb-auto bg-white/20 hover:bg-red-600 text-white backdrop-blur-sm border-0"
                               >

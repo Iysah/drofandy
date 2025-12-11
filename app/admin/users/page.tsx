@@ -6,6 +6,7 @@ import { adminUsers, Role } from '@/lib/users'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import Link from 'next/link'
+import { toast } from 'sonner'
 import AdminNavTabs from '@/components/admin/admin-nav-tabs'
 import { Users, Shield, Trash2, UserPlus, Mail, Calendar } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
@@ -46,32 +47,76 @@ export default function AdminUsersPage() {
     e.preventDefault()
     try {
       setLoading(true)
-      const id = await adminUsers.create(email, role, user?.uid)
+      if (!user) return
+      const token = await user.getIdToken()
+
+      const res = await fetch('/api/users', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
+        body: JSON.stringify({ email, role })
+      })
+
+      if (!res.ok) {
+        const data = await res.json()
+        throw new Error(data.error || 'Failed to add user')
+      }
+
+      toast.success(`Success! User '${email}' has been successfully added.`)
       setEmail('')
       await fetchUsers()
-    } catch (err) {
+    } catch (err: any) {
       console.error(err)
+      toast.error(`Error: Failed to add user. Reason: ${err.message}`)
     } finally {
       setLoading(false)
     }
   }
 
-  const handleDelete = async (id: string) => {
+  const handleDelete = async (id: string, userEmail: string) => {
     if (!confirm('Delete this user role?')) return
     try {
-      await adminUsers.delete(id)
+      if (!user) return
+      const token = await user.getIdToken()
+
+      const res = await fetch(`/api/users?id=${id}`, {
+        method: 'DELETE',
+        headers: { Authorization: `Bearer ${token}` }
+      })
+
+      if (!res.ok) {
+        const data = await res.json()
+        throw new Error(data.error || 'Failed to delete user')
+      }
+
+      toast.success(`Success! User '${userEmail}' has been successfully deleted.`)
       setUsers(users.filter(u => u.id !== id))
-    } catch (err) {
+    } catch (err: any) {
       console.error(err)
+      toast.error(`Error: Failed to delete user. Reason: ${err.message}`)
     }
   }
 
   const handleUpdateRole = async (id: string, newRole: Role) => {
     try {
-      await adminUsers.updateRole(id, newRole)
+      if (!user) return
+      const token = await user.getIdToken()
+
+      const res = await fetch('/api/users', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
+        body: JSON.stringify({ id, role: newRole })
+      })
+
+      if (!res.ok) {
+        const data = await res.json()
+        throw new Error(data.error || 'Failed to update role')
+      }
+
+      toast.success(`Success! User role updated to '${newRole}'.`)
       setUsers(users.map(u => u.id === id ? { ...u, role: newRole } : u))
-    } catch (err) {
+    } catch (err: any) {
       console.error(err)
+      toast.error(`Error: Failed to update role. Reason: ${err.message}`)
     }
   }
 
@@ -250,7 +295,7 @@ export default function AdminUsersPage() {
                             <Button 
                               variant="ghost" 
                               size="sm"
-                              onClick={() => handleDelete(u.id)}
+                              onClick={() => handleDelete(u.id, u.email)}
                               className="text-slate-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors opacity-0 group-hover:opacity-100"
                             >
                               <Trash2 className="w-4 h-4" />

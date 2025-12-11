@@ -11,6 +11,7 @@ import AdminNavTabs from '@/components/admin/admin-nav-tabs'
 import { Briefcase, Star, Trash2, PlusCircle, Image as ImageIcon, UploadCloud, AlertCircle } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
 import Link from 'next/link'
+import { toast } from 'sonner'
 
 export default function AdminServicesPage() {
   const { user } = useAuth()
@@ -63,21 +64,52 @@ export default function AdminServicesPage() {
     if (!user) return
     try {
       setLoading(true)
-  const mediaId = (window as any).__uploaded_media_id || null
-  await content.createService({ title, image, mediaId, description, rating, createdBy: user.uid } as any)
+      const mediaId = (window as any).__uploaded_media_id || null
+      const token = await user.getIdToken()
+      const res = await fetch('/api/services/create', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
+        body: JSON.stringify({ title, image, mediaId, description, rating })
+      })
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}))
+        throw new Error(data?.error || 'Failed to create service')
+      }
+      
+      toast.success(`Success! Service '${title}' has been successfully created.`)
       setTitle('')
       setDescription('')
       setRating(5)
       setImage(undefined)
       await fetchServices()
-    } catch (err) { console.error(err) }
+    } catch (err: any) { 
+        console.error(err) 
+        toast.error(`Error: Failed to create Service. Reason: ${err.message}`)
+    }
     setLoading(false)
   }
 
-  const handleDelete = async (id: string) => {
+  const handleDelete = async (id: string, serviceTitle: string) => {
     if (!confirm('Delete service?')) return
-    await content.deleteService(id)
-    setServices(services.filter(s => s.id !== id))
+    try {
+        if (!user) return
+        const token = await user.getIdToken()
+        const res = await fetch(`/api/services?id=${id}`, {
+            method: 'DELETE',
+            headers: { Authorization: `Bearer ${token}` }
+        })
+        
+        if (!res.ok) {
+            const data = await res.json()
+            throw new Error(data.error || 'Failed to delete service')
+        }
+
+        toast.success(`Success! Service '${serviceTitle}' has been successfully deleted.`)
+        setServices(services.filter(s => s.id !== id))
+    } catch (err: any) {
+        console.error(err);
+        toast.error(`Error: Failed to delete Service. Reason: ${err.message}`)
+    }
   }
 
   if (!user) {
@@ -274,7 +306,7 @@ export default function AdminServicesPage() {
                               <Button 
                                 variant="ghost" 
                                 size="sm"
-                                onClick={() => handleDelete(s.id)}
+                                onClick={() => handleDelete(s.id, s.title)}
                                 className="text-slate-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors opacity-0 group-hover:opacity-100 ml-2"
                               >
                                 <Trash2 className="w-4 h-4" />

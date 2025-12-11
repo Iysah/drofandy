@@ -1,0 +1,50 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Helper function to check if user is authenticated
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    // Projects: Public Read, No Client Write (Use Admin API)
+    match /projects/{projectId} {
+      allow read: if true;
+      allow write: if false; 
+    }
+
+    // Services: Public Read, No Client Write (Use Admin API)
+    match /services/{serviceId} {
+      allow read: if true;
+      allow write: if false;
+    }
+
+    // Testimonials: Public Read, No Client Write (Use Admin API)
+    match /testimonials/{testimonialId} {
+      allow read: if true;
+      allow write: if false;
+    }
+
+    // Blog Posts: Public Read, Admin Write (Keep existing logic if not auditing blog yet, but safer to restrict)
+    match /blogPosts/{postId} {
+      allow read: if resource.data.published == true;
+      allow write: if false; // Use Admin API
+    }
+
+    // Contact Forms: Public Create, Admin Read/Write
+    match /contactForms/{formId} {
+      allow create: if true;
+      allow read, update, delete: if false; // Use Admin API
+    }
+
+    // Users: No Client Access (Use Admin API)
+    match /users/{userId} {
+      allow read, write: if false;
+    }
+    
+    // Default deny
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
